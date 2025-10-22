@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 15 19:54:29 2025
+a = int(input('Введите год: '))
 
-@author: user
-"""
-
+if a % 4 == 0:
+    print('Високосный')   
+else:
+    print('Невисокосный')
