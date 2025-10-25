@@ -1,26 +1,38 @@
-import statistics
-class SchoolJournal:
-    def __init__(self,subject,student,grade_list):
-        self.subject=subject
-        self.student=student
-        self.grade_list=[]
-    def grade(self,a):
-        self.a=a
-        self.grade_list.append(a)
-    def printer(self):
-        print(self.subject)
-        print(self.student)
-        print(self.grade_list)
-    def final_grade(self):
-        print(statistics.mean(self.grade_list))
+class Journal:
+    
+    def __init__(self, klass):
+        self.klass = klass
+  
         
 
+    
+        
+    def add_student(self, students):
+       self.students = []
+       for i in range(len(students)):
+           
+           self.stud_list[students[i]] = {}
 
-stud1=SchoolJournal('Химия','Игорь Байгашов',grade_list=[])
-stud1.grade(4)
-stud1.grade(5)
-stud1.grade(3)
-stud1.grade(2)
-stud1.grade(5)
-stud1.printer()
-stud1.final_grade()
+        
+    def add_subjects(self, subjects):
+        self.subjects = subjects
+        for g in range(len(stud_list)):
+            self.stud_list[g][subjects]
+        
+        
+    def rate_students(self):
+        self.stud_list[]=stud
+        self.subjects[]=subject
+        if self.grade>0 and self.grade<6:
+            grade = int(input)
+        else:
+            print('значение не поддерживается')
+        
+            
+    def print_statistics(self):
+        print('Имя ученика: ', self.stud)
+        print('Название предмета: ',self.subject)
+        print('Оценки: ', self.grade_list)
+        
+        
+        
