@@ -12,7 +12,7 @@ for i in range(N):
             trigonometry_array[i, j] = np.sin(N * i + M * j + 1)            
             slice1 = trigonometry_array[0::, 0::]
             slice2 = trigonometry_array[0::, 1::]
-            slice3 = trigonometry_array[0::, 2::]
-            slice4 = trigonometry_array[0::, 3::]
+            slice1 = slice2
+            slice2 = slice1
 
 print(slice2 + slice1 + slice3 + slice4)

@@ -12,6 +12,6 @@ print(v)
 T = 200
 E = 300
 
-N = 2 / np.sqrt(np.pi) * np.sqrt(h) * (k * T) ** (3 / 2) * e ** (E / (k * T)) * E ** (T / 2)
+N = 2 / np.sqrt(np.pi) * (np.sqrt(h) * (k * T) ** (3 / 2)) * (e ** (E / (k * T))) * E ** (T / 2)
 
 print(N)
