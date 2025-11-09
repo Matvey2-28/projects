@@ -19,50 +19,45 @@ class Puppy:
             
 class Dog:
     
-    def __init__(self, klichka):
-        self.klichka = klichka
-        self.pup_list = {}
-        
-    def add_puppies(self, puppies):
-        self.puppies = puppies
-        for i in range(len(puppies)):
-            self.pup_list[puppies[i]] = {}
-            
-    def add_state_off_puppy(self, puppy, states):
-        self.puppy = puppy
-        self.pup_list[puppy][states[0]]
+    def __init__(self, pup_count):
+        self.pup_count = pup_count
+        self.states = ['Болеет', 'Выздоравливает', 'Здоров']
 
     def heal_all(self):
-        for puppie in self.pup_list:
-            self.pup_list[puppies][states[1]] = []
+        for puppy in self.pup_count:
+            self.pup_count[states[2]] = []
     
     def all_are_healthy(self):
-        for puppie in self.pup_list:
-            if self.pup_list[puppies][states[2]]:
-                print('Все щенки здоровы')
+        for puppy in self.pup_count:
+            if self.pup_count[states[2]]:
+                return True
             else:
-                print('Не все щенки здоровы')
+                return False
                 
     def give_away_all(self):
-        for puppie in self.pup_list:
-            if self.pup_list[puppies][states[2]]:
-                pup_list.clear()
+        for puppie in self.pup_count:
+            if self.pup_count[states[2]]:
+                pup_count = 0
+
                 
-    def print_statistics(self):
-        print(self.pup_list)
-                
-# class Vet:
+class Vet:
     
-#     def __init__(self, name, plant):
-#         self.name = name
-#         self.plant = plant
+    def __init__(self, name, plant):
+        self.name = name
+        self.plant = plant
         
-#     def work(self):
-#         self.heal_all
-#         print('Щенки лечатся')
+    def work(self):
+        Dog.heal_all
+        print('Щенки лечатся')
         
-#     def care(self):
-#         if self.all_are_healthy:
+    def care(self):
+       if Dog.all_are_healthy is True:
+           Dog.give_away_all()
+       else:
+           print('Не все щенки здоровы')
+                
+    # def knowledge_base(self):
+    #     print(self.pup_count[state])
 
         
         
@@ -76,17 +71,13 @@ class Dog:
         
 
         
-        
-# pup = Puppie('счастливый')
-# pup.add_health('Генри', 9)
-# pup.get_treatment() 
-# pup.is_healthy() 
-dog = Dog('Bulbochka')      
-dog.add_puppies(['Генри', 'Antoshka'])
-dog.add_state_off_puppy('Antoshka')
-dog.print_statistics()
 
-        
+dog = Dog(5)  
+vet = Vet('Makanchik', dog)    
+pup = Puppy('счастлив')
+dog.heal_all()
+vet.work()
+vet.care() 
         
         
         
