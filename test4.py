@@ -1,13 +1,8 @@
 import numpy as np
 
-a = int(input('Введите а: '))
-b = int(input('Введите b: '))
-
-a < x and x < b
-
-def function(x):
+def function(a, b, N):
+    x = np.linspace(a, b, N)
     y = x ** 2
-    b = np.array(y)
-    return b
-
-function(x)
+    print(y)
+    
+function(1, 10, 1000)
