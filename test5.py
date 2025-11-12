@@ -1,17 +1,21 @@
 import numpy as np
 
-def area_trangle(a, h):
-    trangle = a * h / 2
-    print(trangle)
+
+def area(figure: str, *arg):
+    '''
+    figure: \n
+    \t circle: R \n
+    \t rectangle: a, b \n
+    \t triangle: a, h \n
+    '''
+    if figure == 'circle':
+        area_culc = np.pi * arg[0] ** 2
+    elif figure == 'rectangle':
+        area_culc = arg[0] * arg[1]
+    else:
+        area_culc = 0.5 * arg[0] * arg[1]
+    print(area_culc)
     
-def area_square(a):
-    square = a ** 2
-    print(square)
-
-def  area_circle(r):  
-    circle = np.pi * r ** 2
-    print(circle)
-
-area_trangle(2, 3)
-area_square(4)
-area_circle(2)
+    
+area('circle', 7)
+help(area)
