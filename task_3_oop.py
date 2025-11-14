@@ -1,27 +1,31 @@
 class Puppy:
     
+    states = ['Болеет', 'Выздоравливает', 'Здоров']
+    
     def __init__(self, index):
         self.index = index
         self.states = ['Болеет', 'Выздоравливает', 'Здоров']
         self.state = self.states[0]
         
     def get_treatment(self):
-        if self.state == self.states[0]:
-            state = states[1]
+        c_index = self.states.index(self.state)
+        if c_index < (self.states) - 1:
+            self.state = self.states[c_index + 1]
+            return True
+        return False
             
     def is_healthy(self):
-        if self.state == self.states[2]:
-            state = states[2]
-            print(state)
-        else:
-            state = states[0]
-            print(state)
+        return self.state == self.states[2]
+    
+    def info(self):
+        return {'index': self.index, 'state': self.state, 'is_healthy': self.is_healthy()}
             
+    def 
 class Dog:
     
     def __init__(self, pup_count):
-        self.pup_count = pup_count
-        self.states = ['Болеет', 'Выздоравливает', 'Здоров']
+        self.puppies = [Puppy(i) for i in range(pup_count)]
+        
 
     def heal_all(self):
         for puppy in self.pup_count:
