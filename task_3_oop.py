@@ -20,7 +20,7 @@ class Puppy:
     def info(self):
         return {'index': self.index, 'state': self.state, 'is_healthy': self.is_healthy()}
             
-    def 
+
 class Dog:
     
     def __init__(self, pup_count):
