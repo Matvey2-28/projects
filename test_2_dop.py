@@ -1,11 +1,13 @@
-import random
+import random as rd
 
 def function(n, rd_numbers):
     numbers = [num for num in range(n) if num not in rd_numbers]
+    
     if not numbers:
         return None
-    return random.choice(numbers)
+    
+    return rd.choice(numbers)
 
-a = function(4, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+a = function(10, [1, 2, 3, 4, 5,])
 print(a)
 
