@@ -1,5 +1,4 @@
-import time
-from hero import *
+
 
 
 class Dragon:
@@ -11,15 +10,15 @@ class Dragon:
         self.hl = hl
     
     def heal(self):
-        if self.hero_hp < 1500:
-            while self.hero_hp != 1500:
+        if self.hero_hp < 15000:
+            while self.hero_hp != 15000:
                 time.sleep(1)
                 hero_hp += hl
                 print('Герой восстанавливает здоровье: ', hero_hp)
-                if self.hero_hp == 1500:
+                if self.hero_hp == 15000:
                     break
                     print('Герой восстановил здоровье')
-        elif self.hero_hp == 1500:
+        elif self.hero_hp == 15000:
             print('Герой не нуждается в лечении')
             
             

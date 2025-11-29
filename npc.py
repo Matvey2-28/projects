@@ -1,8 +1,10 @@
 class NPC:
     
-    def __init__(self, npc: str, npc_hp: int, npc_dm: int):
+    def __init__(self, npc):
         self.npc = npc
-        self.npc_hp = npc_hp
-        self.npc_dm = npc_dm
+        self.npc_hp = 15000
+        self.npc_dm = 200
+        
+        
         
     
