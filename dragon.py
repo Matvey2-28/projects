@@ -1,5 +1,5 @@
 import time
-from hero import Hero
+from hero import *
 
 
 class Dragon:
@@ -21,3 +21,9 @@ class Dragon:
                     print('Герой восстановил здоровье')
         elif self.hero_hp == 1500:
             print('Герой не нуждается в лечении')
+            
+            
+            
+            
+            
+

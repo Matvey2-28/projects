@@ -1,6 +1,7 @@
 import time
-from dragon import Dragon         
-from skeleton import Skeleton
+from dragon import *         
+from skeleton import *
+from npc import *
         
 
 class Hero:
@@ -9,55 +10,31 @@ class Hero:
         self.name = name
         self.hero_hp = hero_hp
         self.hero_dm = hero_dm
-                        
-    def apply_dragon(self):
-        self.dragon = Dragon()
-        
-                        
-    def apply_skeleton(self):
-        self.skeleton = Skeleton()
-            
+                   
                            
-    def attack(self):
-        if hero.apply_dragon():
-            while self.hero1_hp + self.dragon_hp != 0:
-                time.sleep(1)
-                hero1_hp + dragon_hp -= hero_dm + dragon_dm
-                print('Урон: ', hero_dm + dragon_dm)
-                hero_hp + dragon_hp -= hero1_dm + dragon_dm       
+    def attack_with_dragon(self):
+        while npc.self.npc_hp != 0:
+            time.sleep(1)
+            npc_hp -= hero_dm + dragon_dm
+            print('Урон: ', hero_dm + dragon_dm)
                 
-                if self.hero1_hp + self.dragon_hp <= 0:
-                    break
-                    print('Твой герой одержал победу!')
+            if self.npc_hp <= 0:
+                break
+                print('Твой герой одержал победу!')
                     
-        elif hero.apply_skeleton():
-            while self.hero1_hp + self.skelet_hp != 0:
-                time.sleep(1)
-                hero1_hp + skelet_hp -= hero_dm + skelet_dm
-                print('Урон: ', hero_dm + skelet_dm)
-                hero_hp + skelet_hp -= hero1_dm + skelet_dm  
+                    
+    def attack_with_skeleton(self):
+        while npc.self.npc_hp != 0:
+            time.sleep(1)
+            npc_hp -= hero_dm + skelet_dm
+            print('Урон: ', hero_dm + skelet_dm)
+            if self.npc_hp <= 0:
+                break
+                print('Твой герой одержал победу!')
+                    
+                  
 
-                if self.hero1_hp + self.skelet_hp <= 0:
-                    break
-                    print('Твой герой одержал победу!')
-                elif self.hero_hp + self.skelet_hp <= 0:
-                    break
-                    print('Твой герой проиграл!')
-                    
-                        
-                    
-hero = Hero()                   
-                    
-                 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-  
+npc =  NPC('Hog Rider', 1500, 60)
+hero = Hero('Makanchik', 1500, 100)
+dragon1 = Dragon('Leviathan', 500, 50, 50)
+skelet1 = Skeleton('Varior', 700, 70)

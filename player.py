@@ -1,4 +1,4 @@
-class Player1:
+class Player:
     
     def __init__(self, color, nik):
         self.color = color
