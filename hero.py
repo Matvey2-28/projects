@@ -1,42 +1,44 @@
-import time
-from npc import NPC 
-from dragon import Dragon
-from skeleton import Skeleton
+# import time
+# from npc import NPC 
+# from dragon import Dragon
+# from skeleton import Skeleton
 
 class Hero:
                     
     def __init__(self, name):
         self.name = name
-        self.hero_hp = 15000
+        self.hero_hp = 14000
         self.hero_dm = 300
                    
                            
     def attack_with_dragon(self):
-        self.kills_count = 0
-        self.deaths_count = 0
-        while npc.npc_hp != 0:
+        self.kills_count_with_dragon = 0
+        self.deaths_count_with_dragon = 0
+        while npc.npc_hp > 0:
             time.sleep(1)
             npc.npc_hp -= self.hero_dm + dragon1.dragon_dm
-            print('Урон: ', self.hero_dm + dragon1.dragon_dm)
+            print(f'Здоровье врага: {npc.npc_hp} - {self.hero_dm + dragon1.dragon_dm}')
                 
             if npc.npc_hp <= 0:
-                break
-                kills_count += 1
+                self.kills_count_with_dragon += 1
                 print('Твой герой одержал победу!')
+                break
+                
                     
                     
     def attack_with_skeleton(self):
-        self.kills_count = 0
-        self.deaths_count = 0
-        while npc.npc_hp != 0:
+        self.kills_count_with_skelet = 0
+        self.deaths_count_with_skelet = 0
+        while npc.npc_hp > 0:
             time.sleep(1)
             npc.npc_hp -= self.hero_dm + skelet1.skelet_dm
-            print('Урон: ', self.hero_dm + skelet1.skelet_dm)
+            print(f'Здоровье врага: {npc.npc_hp} - {self.hero_dm + skelet1.skelet_dm}')
             
             if npc.npc_hp <= 0:
-                break
-                kills_count += 1
+                self.kills_count_with_skelet += 1
                 print('Твой герой одержал победу!')
+                break
+                
                 
                 
     def go_outside(self):
@@ -50,18 +52,21 @@ class Hero:
     def check_hero_statistics(self):
         print('________Статистика Героя________')
         print('Hero:')
-        print('\t Health: ', self.hero_hp)
+        print('\t Health: ', dragon1.hero1_hp)
         print(f'\t Monsters: {dragon1.dragon_name}, {skelet1.skelet_name}')
-        print('\t Kills: ', self.kills_count)
-        print('\t Deaths: ', self.deaths_count)
+        print('\t Kills: ', self.kills_count_with_dragon + self.kills_count_with_skelet)
+        print('\t Deaths: ', self.deaths_count_with_dragon + self.deaths_count_with_skelet)
         print('________________________________')
                     
                   
 
-npc =  NPC('Hog Rider')
-hero = Hero('Makanchik')
-dragon1 = Dragon('Leviathan', 500, 50, 50)
-skelet1 = Skeleton('Varior', 700, 70)
+# npc =  NPC('Hog Rider')
+# # hero = Hero('Makanchik')
+# dragon1 = Dragon('Leviathan')
+# skelet1 = Skeleton('Varior')
 
 
-hero.check_hero_statistics()
+
+
+
+

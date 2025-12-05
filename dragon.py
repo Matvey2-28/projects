@@ -1,28 +1,32 @@
-
+import time
+from hero import Hero
 
 
 class Dragon:
 
-    def __init__(self, dragon_name: str, dragon_hp: int, dragon_dm: int, hl: int):
+    def __init__(self, dragon_name):
         self.dragon_name = dragon_name
-        self.dragon_hp = dragon_hp
-        self.dragon_dm = dragon_dm
-        self.hl = hl
+        self.dragon_hp = 5000
+        self.dragon_dm = 100
+        self.hl = 300
     
     def heal(self):
-        if self.hero_hp < 15000:
-            while self.hero_hp != 15000:
+        self.hero1_hp = 0
+        if hero.hero_hp < 15000:
+            while hero.hero_hp < 15000:
                 time.sleep(1)
-                hero_hp += hl
-                print('Герой восстанавливает здоровье: ', hero_hp)
-                if self.hero_hp == 15000:
+                hero.hero_hp += self.hl
+                self.hero1_hp = hero.hero_hp
+                print(f'Герой восстанавливает здоровье: {hero.hero_hp} + {self.hl}')
+                if hero.hero_hp >= 15000:
+                    print(f'Герой восстановил здоровье: {self.hero1_hp}')
                     break
-                    print('Герой восстановил здоровье')
-        elif self.hero_hp == 15000:
+                    
+        elif hero.hero_hp == 15000:
             print('Герой не нуждается в лечении')
             
             
             
             
-            
 
+hero = Hero('Makanchik')

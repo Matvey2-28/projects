@@ -6,8 +6,12 @@ from npc import NPC
 from player import Player
 
 pl = Player('red', 'Matvey_pro')
-hero = Hero('Makanchik', 1500, 100)
-dragon1 = Dragon('Leviathan', 500, 50, 50)
-skelet1 = Skeleton('Varior', 700, 70)
-npc =  NPC('Hog Rider', 1500, 60)
-hero.attack_with_skeleton()
+hero = Hero('Makanchik')
+dragon1 = Dragon('Leviathan')
+skelet1 = Skeleton('Varior')
+npc =  NPC('Hog Rider')
+# hero.attack_with_skeleton()
+dragon1.heal()
+# hero.attack_with_dragon()
+# hero.check_hero_statistics()
+dragon1.heal()
