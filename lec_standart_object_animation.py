@@ -14,7 +14,7 @@ fig, ax = plt.subplots()
 ball, = plt.plot([], [], 'o', color='r', label='Ball')
 ball_line, = plt.plot([], [], '-', color='r', label='Trajectory')
     
-frames = 1440
+frames = 360
 coords = np.zeros((frames, 2))
 
 def animate(i):
