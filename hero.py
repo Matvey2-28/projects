@@ -15,31 +15,53 @@ class Hero:
                            
     def attack_with_dragon(self, npc, dragon):
       
-        while npc.npc_hp > 0:
+        while npc.npc_hp > 0 and self.hero_hp > 0:
             time.sleep(1)
-            damage = rd.randrange(100, 500, 50) + dragon.dragon_dm
-            npc.npc_hp -= damage
-            print(f'Здоровье врага: {npc.npc_hp + damage} - {damage} = {npc.npc_hp}')
-                
+            hero_damage = rd.randrange(100, 500, 50) + dragon.dragon_dm
+            npc.npc_hp -= hero_damage
+            print(f'{self.name} и {dragon.dragon_name} атакуют {npc.npc}!')
+            print(f'Здоровье врага: {npc.npc_hp + hero_damage} - {hero_damage} = {npc.npc_hp}')
+            
             if npc.npc_hp <= 0:
                 self.kills_count_with_dragon += 1
                 print('Твой герой одержал победу!')
+                break
+                
+            npc_damage = npc.npc_dm
+            self.hero_hp -= npc_damage
+            print(f'\t {npc.npc} атакует {self.name}!')
+            print(f'\t Здоровье героя: {self.hero_hp + npc_damage} - {npc_damage} = {self.hero_hp}')
+            
+            if self.hero_hp <= 0:
+                self.deaths_count_with_dragon += 1
+                print('Герой погиб!')
                 break
                 
                     
                     
     def attack_with_skeleton(self, npc, skeleton):
      
-        while npc.npc_hp > 0:
-            time.sleep(1)
-            damage = rd.randrange(100, 500, 50) + skeleton.skelet_dm
-            npc.npc_hp -= damage
-            print(f'Здоровье врага: {npc.npc_hp + damage} - {damage} = {npc.npc_hp}')
-            
-            if npc.npc_hp <= 0:
-                self.kills_count_with_skelet += 1
-                print('Твой герой одержал победу!')
-                break
+        while npc.npc_hp > 0 and self.hero_hp > 0:
+           time.sleep(1)
+           hero_damage = rd.randrange(100, 500, 50) + skeleton.skelet_dm
+           npc.npc_hp -= hero_damage
+           print(f'{self.name} и {skeleton.skelet_name} атакуют {npc.npc}!')
+           print(f'Здоровье врага: {npc.npc_hp + hero_damage} - {hero_damage} = {npc.npc_hp}')
+           
+           if npc.npc_hp <= 0:
+               self.kills_count_with_skelet += 1
+               print('Твой герой одержал победу!')
+               break
+               
+           npc_damage = npc.npc_dm
+           self.hero_hp -= npc_damage
+           print(f'\t {npc.npc} атакует {self.name}!')
+           print(f'\t Здоровье героя: {self.hero_hp + npc_damage} - {npc_damage} = {self.hero_hp}')
+           
+           if self.hero_hp <= 0:
+               self.deaths_count_with_skelet += 1
+               print('Герой погиб!')
+               break
                 
                 
     def healing(self, dragon):
