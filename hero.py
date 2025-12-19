@@ -5,8 +5,8 @@ class Hero:
                     
     def __init__(self, name):
         self.name = name
-        self.hero_hp = 14000
-        self.hero1_hp = 14000 
+        self.hero_hp = 15000
+        self.hero1_hp = 15000 
         self.kills_count_with_dragon = 0
         self.deaths_count_with_dragon = 0
         self.kills_count_with_skelet = 0
@@ -85,6 +85,20 @@ class Hero:
                     print('Герой не нуждается в лечении')
                     self.hero_hp = 15000
                     self.hero1_hp = 15000
+                    
+                    
+    def revival(self):
+        
+        if self.hero_hp <= 0:
+            self.hero_hp = 15000
+            self.hero1_hp = self.hero_hp
+            print('Герой возродился!')
+            
+        elif self.hero_hp > 0 and self.hero_hp < 15000:
+            print('Ваш герой жив, но нуждается в восстановлении здоровья')
+            
+        elif self.hero_hp == 15000:
+            print('Ваш герой жив')
                 
                 
     def go_outside(self):
