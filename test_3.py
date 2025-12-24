@@ -3,30 +3,31 @@ import numpy as np
 from matplotlib.animation import FuncAnimation
 
 
-def butterfly_move(t=np.arange(0, 12*np.pi, 0.01)):
-    
-    x = np.sin(t) * ((np.exp ** np.cos(t)) - 2 * np.cos(4 * t) + np.sin(t / 12) ** 5)
-    y = np.cos(t) * ((np.exp ** np.cos(t)) - 2 * np.cos(4 * t) + np.sin(t / 12) ** 5)
-    return x, y
 
 fig, ax = plt.subplots()
-butterfly, = plt.plot([], [], 'o', color='r', label='Ball')
-butterfly_line, = plt.plot([], [], '-', color='r', label='Trajectory')
-
-frames = 360
-
-def animate(i):
+anim_object, = plt.plot([], [])
     
-    butterfly.set_data(butterfly_move(t=i))
-    
-    return butterfly
+x, y = [], []
 
+t = np.linspace(0, 12 * np.pi, 500)    
+    
 ax.axis('equal')
 ax.set_xlim(-5, 5)
 ax.set_ylim(-5, 5)
 
+
+def update(t):
+    x.append(np.sin(t) * (np.e ** np.cos(t) - 2 * np.cos(4 * t) + np.sin(t / 12) ** 5))
+    y.append(np.cos(t) * (np.e ** np.cos(t) - 2 * np.cos(4 * t) + np.sin(t / 12) ** 5))
+    
+    anim_object.set_data(x, y)
+    return anim_object,
+
+
+
+
 ani = FuncAnimation(fig,
-                    animate,
-                    frames = frames,
+                    update,
+                    frames = t,
                     interval = 60)
 ani.save('animation_butterfly.gif', writer='pillow')
