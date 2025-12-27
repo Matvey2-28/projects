@@ -5,13 +5,12 @@ from matplotlib.animation import FuncAnimation
 
 def cicloid():
 
-    def cicloid_move(R=3, vx0=0.01, vy0=0.01, time=10):
+    def cicloid_move(R=3, vx0=0.01, time=10):
         
         x0 = vx0 * time
-        y0 = vy0 * time
         t = np.arange(-2 * R, 2 * R, 0.1)
         x = x0 + R * (t - np.sin(t))
-        y = y0 + R * (1 - np.cos(t))
+        y = R * (1 - np.cos(t))
         return x, y
     
     fig, ax = plt.subplots()
@@ -27,7 +26,7 @@ def cicloid():
         
         return cicloid
     
-    ax.axis('equal')
+    
     ax.set_xlim(-2 * np.pi * 3, 2 * np.pi * 3)
     ax.set_ylim(-2 * 3, 2 * 3)
     
