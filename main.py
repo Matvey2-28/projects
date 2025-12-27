@@ -15,12 +15,12 @@ npc1 = NPC('Hog Rider')
 
 npc2 = NPC('Hog Rider 2')
 
-# hero.go_in_castle()
-# hero.go_outside()
-# hero.healing(dragon1)
+hero.go_in_castle()
+hero.go_outside()
+hero.healing(dragon1)
 hero.attack_with_dragon(npc1, dragon1)
-# hero.healing(dragon1)
-# hero.attack_with_skeleton(npc2, skelet1)
+hero.healing(dragon1)
+hero.attack_with_skeleton(npc2, skelet1)
 
 hero.revival()
 hero.check_hero_statistics(dragon1, skelet1)
