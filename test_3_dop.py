@@ -5,8 +5,8 @@ from matplotlib.animation import FuncAnimation
 
 def star_move(alpha):
     
-    y0 = 1 * alpha
-    x0 = 1 * alpha
+    y0 = 0 * alpha
+    x0 = 0 * alpha
     R = 5
     x1 = x0
     y1 = -R + y0
