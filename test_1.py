@@ -1,16 +1,12 @@
-def logger(filename):
-    def decorator(num_1):
-        def wrapper(*args, **kwargs):
-            result = num_1(*args, **kwargs)
-            f = open(filename, 'w')
-            f.write(str(result))
-            f.close()
-            return result
+def first_num(num_1):
+    def decorator(func):
+        def wrapper(num_2):
+            print(num_1 + func(num_2))
         return wrapper 
-    return decorator 
+    return decorator
 
-@logger('file_test_1.txt')
-def summator(num_2):
-    return sum(num_1, num_2)
+@first_num(5)
+def second_num(num_2):
+    return num_2
 
-summator(3)
+second_num(3)
