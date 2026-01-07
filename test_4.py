@@ -11,7 +11,7 @@ class Planet:
         print('Меня взорвали')
         
     @classmethod 
-    def classmethod(cls):
+    def detach_of_orbit(cls):
         print(f'Меня сместили с орбиты на {cls.orbit - rd.randrange(100, 1000, 100)} и {cls.count_of_detach} раз')
         
     @property 
@@ -19,12 +19,12 @@ class Planet:
         print('Я жива')
         
 Planet.bomb_planet()
-Planet.classmethod()
+Planet.detach_of_orbit()
 pl1 = Planet()
 pl2 = Planet()
 pl3 = Planet()
 pl4 = Planet()
 pl5 = Planet()
 pl6 = Planet()
-Planet.classmethod()
+Planet.detach_of_orbit()
 pl1.is_alive
