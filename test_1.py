@@ -12,7 +12,7 @@ class Buisnessman:
     def info(self):
         print(f'Имя: {self.name}')
         print(f'Возраст: {self.age}')
-        print(f'Каптиал: {self._money}')
+        print(f'Капитал: {self._money}')
         print(f'Наличие бизнеса: {self._business}')
         
     @classmethod
@@ -22,11 +22,11 @@ class Buisnessman:
         print(f'{cls.def_name}')
         
         
-    @staticmethod
     def buy_business(self):
-        if self._money >= self._price - Business.final_price():
-            self._money -= self._price - Business.final_price()
-            print(f'{self.name} приобрел бизнес стоимостью {self._price} руб')
+        if self._money >= bisnes._price - bisnes.final_price:
+            self._money -= bisnes._price - bisnes.final_price
+            print(f'{self.name} приобрел бизнес стоимостью {bisnes._price} руб')
+            print(f'Со скидкой вышло в {bisnes.final_price} руб')
         else:
             print(f'У {self.name} недостаточно средств на покупку данного бизнеса')
     
@@ -41,16 +41,16 @@ class Business:
         self._area = area
         self._price = price
         
-    @property    
+
     def final_price(self, sale):
         self.sale = sale
-        self.final_price -= self._price // self.sale
+        self.final_price = self._price - self._price // self.sale
         return self.final_price
     
 class RestarauntBusiness(Business):
     
     def __init__(self, salary=50000000):
-        super.__init__(area=50000000, price=20000000)
+        super().__init__(area=50000000, price=20000000)
         self.salary = salary
         
 restoran = RestarauntBusiness()    
@@ -58,5 +58,5 @@ bisnes = Business()
 man = Buisnessman()   
 man.info()
 Buisnessman.def_info()
-bisnes.final_price
-Buisnessman.buy_business()
+bisnes.final_price(20)
+man.buy_business()
