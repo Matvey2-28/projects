@@ -5,17 +5,17 @@ from matplotlib.animation import FuncAnimation
 
 def circle_move(time):
     alpha = np.arange(0, 2*np.pi, 0.001)
-    x = (alpha * time) * np.cos(alpha) * time
-    y = (alpha * time) * np.sin(alpha) * time
+    R = time/360
+    x = R * np.cos(alpha)
+    y = R * np.sin(alpha)
+    
     return x, y
 
 fig, ax = plt.subplots()
 
-circle_object, = plt.plot([], [], 'o', lw=2)
-circle_object_trajectory, = plt.plot([], [], '-')
+circle_object, = plt.plot([], [])
 
 frames = 360
-coords = np.zeros((frames, 2))
 
 def animate(i):
     
