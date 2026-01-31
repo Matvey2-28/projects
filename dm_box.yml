@@ -13,7 +13,7 @@ PhysicalConstants:
 # Parameters governing the time integration
 TimeIntegration:
   time_begin: 0.    
-  time_end:   100.  
+  time_end:   120.  
   dt_min:     1e-6  
   dt_max:     1.  
 
