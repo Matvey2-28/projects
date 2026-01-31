@@ -37,7 +37,7 @@ plt.savefig('sun_system.png', dpi=1000)
 
 
 # File
-file = h5py.File('IC', "w")
+file = h5py.File('IC7.hdf5', "w")
 
 # Header
 grp = file.create_group("/Header")
