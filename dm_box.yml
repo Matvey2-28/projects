@@ -22,7 +22,7 @@ Scheduler:
   
 # Parameters governing the snapshots
 Snapshots:
-  basename:            IC7
+  basename:            IC9
   time_first:          0. 
   delta_time:          1.
   compression:         4
@@ -41,5 +41,5 @@ Statistics:
 
 # Parameters related to the initial conditions
 InitialConditions:
-  file_name:  ./IC7.hdf5
+  file_name:  ./IC9.hdf5
   periodic:   1

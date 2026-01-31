@@ -31,13 +31,13 @@ masses[0] = M_SUN
 coords[0] = [0, 0, 0]
 vel[0] = [0, 0, 0]
 
-plt.plot(coords[:, 0], coords[:, 1], 'o')
-plt.axis('equal')
-plt.savefig('sun_system.png', dpi=1000)
+# plt.plot(coords[:, 0], coords[:, 1], 'o')
+# plt.axis('equal')
+# plt.savefig('sun_system.png', dpi=1000)
 
 
 # File
-file = h5py.File('IC7.hdf5', "w")
+file = h5py.File('IC9.hdf5', "w")
 
 # Header
 grp = file.create_group("/Header")
