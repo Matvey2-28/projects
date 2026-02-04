@@ -1,0 +1,207 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []> 
+<Xdmf xmlns:xi="http://www.w3.org/2003/XInclude" Version="2.1">
+<Domain>
+<Grid Name="TimeSeries" GridType="Collection" CollectionType="Temporal">
+
+
+<!-- XMF description for file: ././_0000.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="0.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0000.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0000.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0000.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0000.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0000.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0000.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0000.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0000, time=0.000000 -->
+
+
+<!-- XMF description for file: ././_0001.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="86400.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0001.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0001.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0001.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0001.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0001.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0001.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0001.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0001, time=86400.000000 -->
+
+
+<!-- XMF description for file: ././_0002.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="172800.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0002.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0002.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0002.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0002.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0002.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0002.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0002.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0002, time=172800.000000 -->
+
+
+<!-- XMF description for file: ././_0003.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="259200.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0003.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0003.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0003.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0003.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0003.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0003.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0003.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0003, time=259200.000000 -->
+
+
+<!-- XMF description for file: ././_0004.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="345600.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0004.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0004.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0004.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0004.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0004.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0004.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0004.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0004, time=345600.000000 -->
+
+
+<!-- XMF description for file: ././_0005.hdf5 -->
+<Grid GridType="Collection" CollectionType="Spatial">
+<Time Type="Single" Value="432000.000000"/>
+
+<Grid Name="DM" GridType="Uniform">
+<Topology TopologyType="Polyvertex" Dimensions="1000"/>
+<Geometry GeometryType="XYZ">
+<DataItem Dimensions="1000 3" NumberType="Double" Precision="8" Format="HDF">_0005.hdf5:/PartType1/Coordinates</DataItem>
+</Geometry>
+ <!-- Done geometry for DM, start of particle fields list -->
+<Attribute Name="Coordinates" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="8" Format="HDF">_0005.hdf5:/PartType1/Coordinates</DataItem>
+</Attribute>
+<Attribute Name="Velocities" AttributeType="Vector" Center="Node">
+<DataItem Dimensions="1000 3" NumberType="Float" Precision="4" Format="HDF">_0005.hdf5:/PartType1/Velocities</DataItem>
+</Attribute>
+<Attribute Name="Masses" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0005.hdf5:/PartType1/Masses</DataItem>
+</Attribute>
+<Attribute Name="ParticleIDs" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Int" Precision="8" Format="HDF">_0005.hdf5:/PartType1/ParticleIDs</DataItem>
+</Attribute>
+<Attribute Name="Softenings" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0005.hdf5:/PartType1/Softenings</DataItem>
+</Attribute>
+<Attribute Name="Potentials" AttributeType="Scalar" Center="Node">
+<DataItem Dimensions="1000" NumberType="Float" Precision="4" Format="HDF">_0005.hdf5:/PartType1/Potentials</DataItem>
+</Attribute>
+</Grid> <!-- End of meta-data for parttype=DM -->
+
+</Grid> <!-- End of meta-data for output=0005, time=432000.000000 -->
+
+</Grid> <!-- timeSeries -->
+</Domain>
+</Xdmf>

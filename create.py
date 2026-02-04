@@ -10,11 +10,13 @@ N = 1000
 M_SUN = 1.998e30
 G = 6.67e-11
 
+box_size = 100 * AE
+
 masses = np.full(N, 1e17)
 id_parts = np.arange(0, N, 1)
 
-phi = np.linspace(0, 2*np.pi*6, N)
-r = np.random.random(N) * 1.2 + 2.01
+phi = np.linspace(0, 2*np.pi, N)
+r = (np.random.random(N) * 1.2 + 2.01) * AE
 
 x = r * np.cos(phi)
 y = r * np.sin(phi)
@@ -23,17 +25,19 @@ coords = np.zeros((N, 3))
 coords[:, 0], coords[:, 1] = x, y
 
 v = np.sqrt(G * M_SUN / r)
-v_x = v * np.cos(phi)
-v_y = v * np.sin(phi)
+v_x = - v * np.sin(phi)
+v_y = v * np.cos(phi)
 
 vel = np.zeros((N, 3))
 vel[:, 0], vel[:, 1] = v_x, v_y
 
 #Sun
-masses[0] = M_SUN
-coords[0] = [0, 0, 0]
-coords = (coords + 3.3) * AE
+masses[1] = M_SUN
+coords[1] = [5*AE, -AE, 0]
+vel[1] = [0, 30000, 0]
+coords = coords + box_size / 2
 # print(coords)
+# print(vel)
 
 # plt.plot(coords[:, 0], coords[:, 1] , 'o', color='#FF3838')
 # plt.axis('equal')
@@ -47,7 +51,7 @@ file = h5py.File('./IC.hdf5', "w")
 
 # Header
 grp = file.create_group("/Header")
-grp.attrs["BoxSize"] = 4 * AE
+grp.attrs["BoxSize"] = box_size
 grp.attrs["NumPart_Total"] = [0, N, 0, 0, 0, 0]
 grp.attrs["NumPart_Total_HighWord"] = [0, 0, 0, 0, 0, 0]
 grp.attrs["NumPart_ThisFile"] = [0, N, 0, 0, 0, 0]
