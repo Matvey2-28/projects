@@ -7,7 +7,7 @@ InternalUnitSystem:
   UnitTemp_in_cgs:     1   # Kelvin
 
 PhysicalConstants:
-  G:            6.67408e-8 
+  G:            6.67408e-11
 
 Scheduler:
   max_top_level_cells: 12

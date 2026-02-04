@@ -6,7 +6,7 @@ import sys
 
 
 AE = 149597870700
-N = 1000
+N = 10000
 M_SUN = 1.998e30
 G = 6.67e-11
 
@@ -30,6 +30,10 @@ v_y = v * np.cos(phi)
 
 vel = np.zeros((N, 3))
 vel[:, 0], vel[:, 1] = v_x, v_y
+
+masses[0] = M_SUN
+coords[0] = [0, 0, 0]
+vel[0] = [0, 0, 0]
 
 #Sun
 masses[1] = M_SUN
