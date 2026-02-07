@@ -20,9 +20,9 @@ r = (np.random.random(N) * 1.2 + 2.01) * AE
 
 x = r * np.cos(phi)
 y = r * np.sin(phi)
-z = np.zeros(N)
+z = np.arange(N)
 coords = np.zeros((N, 3))
-coords[:, 0], coords[:, 1] = x, y
+coords[:, 0], coords[:, 1], coords[:, 2] = x, y, z
 
 v = np.sqrt(G * M_SUN / r)
 v_x = - v * np.sin(phi)
@@ -31,26 +31,26 @@ v_y = v * np.cos(phi)
 vel = np.zeros((N, 3))
 vel[:, 0], vel[:, 1] = v_x, v_y
     
-masses[4] = M_SUN
-coords[4] = [AE, -5*AE, 0]
-vel[4] = [30000, 0, 0]
+# masses[4] = M_SUN
+# coords[4] = [AE, -5*AE, 0]
+# vel[4] = [30000, 0, 0]
     
-masses[3] = M_SUN
-coords[3] = [-AE, 5*AE, 0]
-vel[3] = [-30000, 0, 0]
+# masses[3] = M_SUN
+# coords[3] = [-AE, 5*AE, 0]
+# vel[3] = [-30000, 0, 0]
 
 masses[0] = M_SUN
 coords[0] = [0, 0, 0]
 vel[0] = [0, 0, 0]
 
-masses[2] = M_SUN
-coords[2] = [-5*AE, AE, 0]
-vel[2] = [0, -30000, 0]
+# masses[2] = M_SUN
+# coords[2] = [-5*AE, AE, 0]
+# vel[2] = [0, -30000, 0]
 
-#Sun
-masses[1] = M_SUN
-coords[1] = [5*AE, -AE, 0]
-vel[1] = [0, 30000, 0]
+ #Sun
+# masses[1] = M_SUN
+# coords[1] = [5*AE, -AE, 0]
+# vel[1] = [0, 30000, 0]
 coords = coords + box_size / 2
 # print(coords)
 # print(vel)
