@@ -3,23 +3,33 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as plt3d
 import h5py
 import sys
-
+import shapely.geometry as geom
 
 AE = 149597870700
-N = 5000
 M_SUN = 1.998e30
 G = 6.67e-11
+m_H = 2 * 1.67e-27
+MU_H = 0.002
+R = 8.31
+k = 1.38e-23
+
+def coords_generator(r, N):
+    phi = np.linspace(0, 2*np.pi, N)
+    x = r * np.cos(phi)
+    y = r * np.sin(phi)
+    return np.array(list(zip(x, y)))
+
+def vel_cal(x, y):
+    alpha = np.atan(y, x)
+    r = np.sqrt(x**2 + y**2)
+    v = np.sqrt(G * M_SUN / r)
+    return v*np.cos(alpha), v*np.sin(alpha)
 
 box_size = 100 * AE
 
 masses = np.full(N, 1e17)
 id_parts = np.arange(0, N, 1)
 
-phi = np.linspace(0, 2*np.pi, N)
-r = (np.random.random(N) * 1.2 + 2.01) * AE
-
-x = r * np.cos(phi)
-y = r * np.sin(phi)
 z = np.arange(N)
 coords = np.zeros((N, 3))
 coords[:, 0], coords[:, 1], coords[:, 2] = x, y, z
