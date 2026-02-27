@@ -10,6 +10,7 @@ N = 5000
 M_SUN = 1.998e30
 G = 6.67e-11
 RHO_SUN = M_SUN / 1.40927e27
+# R_SUN = 6957e5
 
 box_size = 100 * AE
 
@@ -42,6 +43,7 @@ vel[:, 0], vel[:, 1], vel[:, 2] = v_x, v_y, v_z
 # coords[3] = [-AE, 5*AE, 0]
 # vel[3] = [-30000, 0, 0]
 
+densities[0] = RHO_SUN
 masses[0] = M_SUN
 coords[0] = [0, 0, 0]
 vel[0] = [0, 0, 0]
@@ -55,11 +57,13 @@ vel[0] = [0, 0, 0]
 # coords[1] = [5*AE, -AE, 0]
 # vel[1] = [0, 30000, 0]
 coords = coords + box_size / 2
-# print(coords)
-# print(vel)
+print(coords)
+print(vel)
+# fig = plt.figure()
+# ax = fig.add_subplot(projection='3d')
 
-# plt.plot(coords[:, 0], coords[:, 1] , 'o', color='#FF3838')
-# plt.axis('equal')
+# ax.plot(coords[:, 0], coords[:, 1], coords[:, 2] , 'o', color='#FF3838')
+# ax.axis('equal')
 # plt.savefig('Solor_sys.png', dpi=1000)
 # plt.close()
 
