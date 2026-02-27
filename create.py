@@ -10,9 +10,11 @@ N = 5000
 M_SUN = 1.998e30
 G = 6.67e-11
 RHO_SUN = M_SUN / 1.40927e27
+T_SUN = 5780
 # R_SUN = 6957e5
 
 box_size = 100 * AE
+
 
 masses = np.full(N, 1e17)
 densities = np.full(N, 3137)
@@ -42,7 +44,7 @@ vel[:, 0], vel[:, 1], vel[:, 2] = v_x, v_y, v_z
 # masses[3] = M_SUN
 # coords[3] = [-AE, 5*AE, 0]
 # vel[3] = [-30000, 0, 0]
-
+temperatures[0] = T_SUN
 densities[0] = RHO_SUN
 masses[0] = M_SUN
 coords[0] = [0, 0, 0]
@@ -57,8 +59,8 @@ vel[0] = [0, 0, 0]
 # coords[1] = [5*AE, -AE, 0]
 # vel[1] = [0, 30000, 0]
 coords = coords + box_size / 2
-print(coords)
-print(vel)
+# print(coords)
+# print(vel)
 # fig = plt.figure()
 # ax = fig.add_subplot(projection='3d')
 
