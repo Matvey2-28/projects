@@ -9,10 +9,12 @@ AE = 149597870700
 N = 5000
 M_SUN = 1.998e30
 G = 6.67e-11
+RHO_SUN = M_SUN / 1.40927e27
 
 box_size = 100 * AE
 
 masses = np.full(N, 1e17)
+densities = np.full(N, 3137)
 id_parts = np.arange(0, N, 1)
 
 phi = np.linspace(0, 2*np.pi, N)
@@ -27,9 +29,10 @@ coords[:, 0], coords[:, 1], coords[:, 2] = x, y, z
 v = np.sqrt(G * M_SUN / r)
 v_x = - v * np.sin(phi)
 v_y = v * np.cos(phi)
+v_z = np.arange(N)
 
 vel = np.zeros((N, 3))
-vel[:, 0], vel[:, 1] = v_x, v_y
+vel[:, 0], vel[:, 1], vel[:, 2] = v_x, v_y, v_z
     
 # masses[4] = M_SUN
 # coords[4] = [AE, -5*AE, 0]
@@ -93,5 +96,6 @@ ds = grp.create_dataset("Velocities", (N, 3), "f", data=vel)
 ds = grp.create_dataset("Masses", (N, 1), "f", data=masses)
 ds = grp.create_dataset("ParticleIDs", (N, 1), "L", data = id_parts)
 ds = grp.create_dataset("Coordinates", (N, 3), "d", data=coords)
+ds = grp.create_dataset("Densities", (N, 1), "f", data=densities)
 
 file.close()
