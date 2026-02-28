@@ -1,4 +1,5 @@
 import numpy as np
+import random
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as plt3d
 import h5py
@@ -23,11 +24,18 @@ id_parts = np.arange(0, N, 1)
 phi = np.linspace(0, 2*np.pi, N)
 r = (np.random.random(N) * 1.2 + 2.01) * AE
 
+
 x = r * np.cos(phi)
 y = r * np.sin(phi)
 z = np.arange(N)
 coords = np.zeros((N, 3))
 coords[:, 0], coords[:, 1], coords[:, 2] = x, y, z
+temperatures = T_SUN * np.sqrt(x**2 + y**2)
+
+# def bell_function(x, y, dec_rate=[0.5, 0.5]):
+#     temperatures = T_SUN * np.exp(- dec_rate[0]*x**2 - dec_rate[1]*y**2)
+#     return temperatures
+
 
 v = np.sqrt(G * M_SUN / r)
 v_x = - v * np.sin(phi)
@@ -63,11 +71,14 @@ coords = coords + box_size / 2
 # print(vel)
 # fig = plt.figure()
 # ax = fig.add_subplot(projection='3d')
+fig, ax = plt.subplots()
 
-# ax.plot(coords[:, 0], coords[:, 1], coords[:, 2] , 'o', color='#FF3838')
-# ax.axis('equal')
-# plt.savefig('Solor_sys.png', dpi=1000)
-# plt.close()
+# sc_plot = ax.scatter(x, y, c=bell_function(x, y, [0.5, 1.5]))
+# fig.colorbar(sc_plot)
+plt.plot(coords[:, 0], coords[:, 1], 'o', color='#FF3838')
+plt.axis('equal')
+plt.savefig('Solor_sys.png', dpi=1000)
+plt.close()
 
 
 # File
@@ -103,5 +114,6 @@ ds = grp.create_dataset("Masses", (N, 1), "f", data=masses)
 ds = grp.create_dataset("ParticleIDs", (N, 1), "L", data = id_parts)
 ds = grp.create_dataset("Coordinates", (N, 3), "d", data=coords)
 ds = grp.create_dataset("Densities", (N, 1), "f", data=densities)
+ds = grp.create_dataset("Temperatures", (N, 1), "f", data=temperatures)
 
 file.close()
