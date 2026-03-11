@@ -1,99 +1,105 @@
 import numpy as np
-import random
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as plt3d
 import h5py
 import sys
-
+import shapely.geometry as geom
+from scipy import interpolate
 
 AE = 149597870700
-N = 5000
+N = 10000
 M_SUN = 1.998e30
 G = 6.67e-11
-RHO_SUN = M_SUN / 1.40927e27
-T_SUN = 5780
-# R_SUN = 6957e5
+
+sun_coord = np.array([5 * AE, -AE, 0])
+sun_vel = np.array([0, 0, 0])
+sun_mass = np.array([M_SUN])
 
 box_size = 100 * AE
 
-
-masses = np.full(N, 1e17)
-densities = np.full(N, 3137)
-id_parts = np.arange(0, N, 1)
-
-phi = np.linspace(0, 2*np.pi, N)
-r = (np.random.random(N) * 1.2 + 2.01) * AE
-
-
+phi = np.linspace(0, 2*np.pi, 40)
+r = 0.5 + np.cos(phi)
 x = r * np.cos(phi)
 y = r * np.sin(phi)
-z = np.arange(N)
-coords = np.zeros((N, 3))
-coords[:, 0], coords[:, 1], coords[:, 2] = x, y, z
-temperatures = T_SUN * np.sqrt(x**2 + y**2)
 
-# def bell_function(x, y, dec_rate=[0.5, 0.5]):
-#     temperatures = T_SUN * np.exp(- dec_rate[0]*x**2 - dec_rate[1]*y**2)
-#     return temperatures
+################## PAVEL ########################################
+spline_coords, figure_spline_part = interpolate.splprep([x, y], s=0)
+spline_curve = interpolate.splev(figure_spline_part, spline_coords)
 
+curve_coords = []
+for i in range(len(spline_curve[0])):
+    curve_coords.append([spline_curve[0][i], spline_curve[1][i]])
 
-v = np.sqrt(G * M_SUN / r)
-v_x = - v * np.sin(phi)
-v_y = v * np.cos(phi)
-v_z = np.arange(N)
+polygon = geom.Polygon(curve_coords)
+points_numper_per_side = 500
+x_pictures_limits = [-0.5, 2]
+y_pictures_limits = [-1, 1]
 
-vel = np.zeros((N, 3))
-vel[:, 0], vel[:, 1], vel[:, 2] = v_x, v_y, v_z
-    
-# masses[4] = M_SUN
-# coords[4] = [AE, -5*AE, 0]
-# vel[4] = [30000, 0, 0]
-    
-# masses[3] = M_SUN
-# coords[3] = [-AE, 5*AE, 0]
-# vel[3] = [-30000, 0, 0]
-temperatures[0] = T_SUN
-densities[0] = RHO_SUN
-masses[0] = M_SUN
-coords[0] = [0, 0, 0]
-vel[0] = [0, 0, 0]
+points_coords = []
 
-# masses[2] = M_SUN
-# coords[2] = [-5*AE, AE, 0]
-# vel[2] = [0, -30000, 0]
+for x_point_coord in np.linspace(*x_pictures_limits, points_numper_per_side):
+    for y_point_coord in np.linspace(*y_pictures_limits, points_numper_per_side):
+        p = geom.Point(x_point_coord, y_point_coord)
+        if p.within(polygon):
+            points_coords.append(x_point_coord)
+            points_coords.append(y_point_coord)
 
- #Sun
-# masses[1] = M_SUN
-# coords[1] = [5*AE, -AE, 0]
-# vel[1] = [0, 30000, 0]
-coords = coords + box_size / 2
-# print(coords)
-# print(vel)
-# fig = plt.figure()
-# ax = fig.add_subplot(projection='3d')
-fig, ax = plt.subplots()
+x_p = np.array(points_coords[0::2]) + box_size / 2
+y_p = np.array(points_coords[1::2]) + box_size / 2
 
-# sc_plot = ax.scatter(x, y, c=bell_function(x, y, [0.5, 1.5]))
-# fig.colorbar(sc_plot)
-plt.plot(coords[:, 0], coords[:, 1], 'o', color='#FF3838')
-plt.axis('equal')
-plt.savefig('Solor_sys.png', dpi=1000)
-plt.close()
+gas_part_num = len(x_p)
+id_parts = np.arange(0, gas_part_num, 1)
+gas_h = np.full(gas_part_num, 0.1)
+################################################################
+
+#################### MATVEI ####################################
+m_H = 2*1.6735575e-24 # масса молекулы водорода в граммах
+n_H = 2*10**5 # характерная концентрация частиц в частицах на куб. см
+R = 8.314
+mu = 2 * 10**(-3)
+k = 1.38 * 10**(-23)
+
+scale = 0.1
+
+T = 100
+rho = m_H * n_H * scale
+p = rho * R / mu * T
 
 
-# File
+area_disk = np.pi * (max(x_p)**2 + max(y_p)**2 
+                  - min(x_p)**2 - min(y_p)**2)
+m = rho * area_disk
+
+gas_rho = np.full(gas_part_num, rho)
+gas_T = np.full(gas_part_num, T)
+gas_p = gas_rho * R / mu * gas_T
+gas_energy = 3 / 2 * k * gas_T
+gas_m = np.full(gas_part_num, m)
+###############################################
+
+gas_coords = np.zeros([gas_part_num, 3])
+gas_vel = np.zeros([gas_part_num, 3])
+
+for i in range(len(x_p)):
+    gas_coords[i, 0] = x_p[i]
+    gas_coords[i, 1] = y_p[i]
+
+    gas_vel[i, 0] = 0.001
+    gas_vel[i, 1] = 0.0
+
+
 
 file = h5py.File('./IC.hdf5', "w")
 
 # Header
 grp = file.create_group("/Header")
 grp.attrs["BoxSize"] = box_size
-grp.attrs["NumPart_Total"] = [0, N, 0, 0, 0, 0]
+grp.attrs["NumPart_Total"] = [gas_part_num, 1, 0, 0, 0, 0]
 grp.attrs["NumPart_Total_HighWord"] = [0, 0, 0, 0, 0, 0]
-grp.attrs["NumPart_ThisFile"] = [0, N, 0, 0, 0, 0]
+grp.attrs["NumPart_ThisFile"] = [gas_part_num, 1, 0, 0, 0, 0]
 grp.attrs["Time"] = 0.0
 grp.attrs["NumFilesPerSnapshot"] = 1
-grp.attrs["MassTable"] = [0.0, N, 0.0, 0.0, 0.0, 0.0]
+grp.attrs["MassTable"] = [gas_part_num, 1, 0.0, 0.0, 0.0, 0.0]
 grp.attrs["Flag_Entropy_ICs"] = 0
 grp.attrs["Dimension"] = 3
 
@@ -105,15 +111,23 @@ grp.attrs["Unit time in cgs (U_t)"] = 1.0
 grp.attrs["Unit current in cgs (U_I)"] = 1.0
 grp.attrs["Unit temperature in cgs (U_T)"] = 1.0
 
+    
+grp = file.create_group("/PartType0")
+grp.create_dataset("Coordinates", data=gas_coords, dtype="f")
+grp.create_dataset("Velocities", data=gas_vel, dtype="f")
+grp.create_dataset("Masses", data=gas_m, dtype="f")
+grp.create_dataset("SmoothingLength", data=gas_h, dtype="f")
+grp.create_dataset("InternalEnergy", data=gas_energy, dtype="f")
+grp.create_dataset("ParticleIDs", data=np.arange(0, gas_part_num))
+grp.create_dataset("Density", data=gas_rho, dtype="f")
 
-# Particle group
+
 grp = file.create_group("/PartType1")
+grp.create_dataset("Coordinates",  data=sun_coord, dtype="f")
+grp.create_dataset("Velocities", data=sun_vel, dtype="f")
+grp.create_dataset("Masses", data=sun_mass, dtype="f")
+grp.create_dataset("ParticleIDs", data=np.arange(gas_part_num+1))
 
-ds = grp.create_dataset("Velocities", (N, 3), "f", data=vel)
-ds = grp.create_dataset("Masses", (N, 1), "f", data=masses)
-ds = grp.create_dataset("ParticleIDs", (N, 1), "L", data = id_parts)
-ds = grp.create_dataset("Coordinates", (N, 3), "d", data=coords)
-ds = grp.create_dataset("Densities", (N, 1), "f", data=densities)
-ds = grp.create_dataset("Temperatures", (N, 1), "f", data=temperatures)
+
 
 file.close()

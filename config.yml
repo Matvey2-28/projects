@@ -9,6 +9,9 @@ InternalUnitSystem:
 PhysicalConstants:
   G:            6.67408e-11
 
+SPH:
+  resolution_eta: 1.2369
+
 Scheduler:
   max_top_level_cells: 12
   
