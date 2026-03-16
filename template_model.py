@@ -16,14 +16,14 @@ R = 8.3144598  # Газовая постоянная, Дж/(моль*К)
 N_a = 6.0221409e+23 # Число Авогадро 
 k = 1.38064852e-23 # Больцманская постоянная
 ETA = 1.2348 # Коэффициент среднего расстояния между частицами SPH
+T_SUN = 5740 # Внешняя температура солнца, К
 
 
 def vel_calc(r):
     return np.sqrt(G * M_SUN / r)
 
 
-def create_random_dist_model(temperature, # Температура, К
-                             radius_interior, # Внутренний радиус газового диска
+def create_random_dist_model(radius_interior, # Внутренний радиус газового диска
                              radius_exterior, # Внешний радиус газового диска
                              thickness # Толщина газового диска
                              ):
@@ -31,11 +31,20 @@ def create_random_dist_model(temperature, # Температура, К
     x_centre = box_size / 2
     y_centre = box_size / 2
     z_centre = box_size / 2
-
+    
+    x = 0 
+    y = 0 
+    
+    def coords_generator(r=1e5, N=50000):
+        phi = np.linspace(0, 2*np.pi, N)
+        x = r * np.cos(phi)
+        y = r * np.sin(phi)
+        return x, y
+    
     ############## PartType0 (Gas) ##############
-    T = np.full(num_part, temperature)
+    temperatures = 
     rho = np.full(num_part, n_H * m_H) # Плотность водорода, кг/м^3
-    P = R / MU_H * rho * T
+    P = R / MU_H * rho * temperatures
     # u = P / rho / (gamma - 1)
     u = 3  * k * T / m_H / 2
 
@@ -70,15 +79,11 @@ def create_random_dist_model(temperature, # Температура, К
     vel_star = np.zeros([1, 3])
     mass_star = np.array([M_SUN])
 
-    return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+    return ((pos, vel, masses, u, P, temperatures, rho, smth_lnght),
             (pos, vel, masses, pos_star, vel_star, mass_star))
 
 
-def coords_generator(r, N):
-    phi = np.linspace(0, 2*np.pi, N)
-    x = r * np.cos(phi)
-    y = r * np.sin(phi)
-    return np.array(list(zip(x, y)))
+
 
 
 def _vel_calc(x, y):
@@ -89,7 +94,7 @@ def _vel_calc(x, y):
     return v_x, v_y
 
 
-def create_regular_dist_model(temperature, # Температура, К
+def create_regular_dist_model(
                               radius_interior, # Внутренний радиус газового диска
                               radius_exterior, # Внешний радиус газового диска
                               thickness # Толщина газового диска
@@ -117,9 +122,9 @@ def create_regular_dist_model(temperature, # Температура, К
     pos = np.array(pos_xy)
     vel = np.array(vel_xy)
 
-    T = np.full(num_part, temperature)
+    temperatures = T_SUN
     rho = np.full(num_part, n_H * m_H)
-    P = R / MU_H * rho * T
+    P = R / MU_H * rho * temperatures
     u = 3  * k * T / m_H / 2
 
     V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
@@ -188,7 +193,6 @@ if __name__ == "__main__":
     radius_interior = AU * 0.6
     radius_exterior = AU * 1.2
     thickness = AU * 0.2
-    temperature = 100
 
     gas_data, material_parts_data = create_regular_dist_model(temperature, radius_interior, radius_exterior, thickness)
     
