@@ -74,8 +74,14 @@ def create_regular_dist_model(temperature, # Температура, К
     num_part = len(pos_xy)
     pos = np.array(pos_xy)
     vel = np.array(vel_xy)
-
-    T = np.full(num_part, temperature)
+    
+    def temperature_gen(temperature):
+        r = np.linspace(0, radius_exterior)
+        temps = temperature * np.sqrt(r ** 2 / (4 * AU ** 2)) 
+        
+        return temps
+    
+    T = np.array([temperature_gen(d) for d in pos])
     rho = np.full(num_part, n_H * m_H)
     P = R / MU_H * rho * T
     u = 3  * k * T / m_H / 2
@@ -173,3 +179,8 @@ grp.create_dataset("Coordinates",  data=sun_coords, dtype="f")
 grp.create_dataset("Velocities", data=sun_vel, dtype="f")
 grp.create_dataset("Masses", data=sun_mass, dtype="f")
 grp.create_dataset("ParticleIDs", data=np.arange(len(gas_parts['particle_mass']), len(gas_parts['particle_mass'])+int(1)))
+
+IC.close()
+
+
+
