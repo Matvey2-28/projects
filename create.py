@@ -78,7 +78,7 @@ def create_regular_dist_model(temperature, # Температура, К
     T = np.full(num_part, temperature)
     rho = np.full(num_part, n_H * m_H)
     P = R / MU_H * rho * T
-    u = (3  * k * (T / m_H)) / 2
+    u = 3  * k * T / m_H / 2
 
     V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
     smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
@@ -134,23 +134,17 @@ gas_parts_vel = np.array(tuple(zip(
                 gas_parts['particle_velocity_x'], 
                 gas_parts['particle_velocity_y'], 
                 gas_parts['particle_velocity_z'])))
-
+                    
 sun_mass = np.array([M_SUN])
-sun_coords = np.array([[box_size/2, box_size/2, 0]])
-sun_vel = np.array([[0, 0, 0]])
-
-test_mass = np.append(gas_parts['particle_mass'], sun_mass)
-test_vel = np.append(gas_parts_vel, sun_vel, axis=0)
-test_coords = np.append(gas_parts_coords, sun_coords, axis=0)
-test_num_part = len(test_mass)
-
+sun_coords = np.array([box_size/2, box_size/2, 0])
+sun_vel = np.array([0, 0, 0])
 
 IC = h5py.File('./IC.hdf5', 'w')
 grp = IC.create_group("/Header")
 grp.attrs["BoxSize"] = [box_size, box_size, 0]
-grp.attrs["NumPart_Total"] = [0, test_num_part, 0, 0, 0, 0]
+grp.attrs["NumPart_Total"] = [len(gas_parts['particle_mass']), 1, 0, 0, 0, 0]
 grp.attrs["NumPart_Total_HighWord"] = [0, 0, 0, 0, 0, 0]
-grp.attrs["NumPart_ThisFile"] = [0, test_num_part, 0, 0, 0, 0]
+grp.attrs["NumPart_ThisFile"] = [len(gas_parts['particle_mass']), 1, 0, 0, 0, 0]
 grp.attrs["Time"] = 0.0
 grp.attrs["NumFileOutputsPerSnapshot"] = 1
 grp.attrs["MassTable"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -158,26 +152,20 @@ grp.attrs["Flag_Entropy_ICs"] = [0, 0, 0, 0, 0, 0]
 grp.attrs["Dimension"] = 2
 
 grp = IC.create_group("/Units")
-grp.attrs["Unit length in cgs (U_L)"] = 1.0
-grp.attrs["Unit mass in cgs (U_M)"] = 1.0
+grp.attrs["Unit length in cgs (U_L)"] = 100
+grp.attrs["Unit mass in cgs (U_M)"] = 1000
 grp.attrs["Unit time in cgs (U_t)"] = 1.0
 grp.attrs["Unit current in cgs (U_I)"] = 1.0
 grp.attrs["Unit temperature in cgs (U_T)"] = 1.0
 
-# grp = IC.create_group("/PartType1")
-# grp.create_dataset("Coordinates",  data=test_coords, dtype="f")
-# grp.create_dataset("Velocities", data=test_vel, dtype="f")
-# grp.create_dataset("Masses", data=test_mass, dtype="f")
-# grp.create_dataset("ParticleIDs", data=np.arange(0, test_num_part, 1))
-
-# grp = IC.create_group("/PartType1")
-# grp.create_dataset("Coordinates", data=gas_parts_coords, dtype="f")
-# grp.create_dataset("Velocities", data=gas_parts_vel, dtype="f")
-# grp.create_dataset("Masses", data=gas_parts['particle_mass'], dtype="f")
-# grp.create_dataset("SmoothingLength", data=gas_parts['smoothing_length'], dtype="f")
-# grp.create_dataset("InternalEnergy", data=gas_parts['internal_energy'], dtype="f")
-# grp.create_dataset("ParticleIDs", data=np.arange(0, len(gas_parts['particle_mass'])))
-# grp.create_dataset("Density", data=gas_parts['density'], dtype="f")
+grp = IC.create_group("/PartType0")
+grp.create_dataset("Coordinates", data=gas_parts_coords, dtype="f")
+grp.create_dataset("Velocities", data=gas_parts_vel, dtype="f")
+grp.create_dataset("Masses", data=gas_parts['particle_mass'], dtype="f")
+grp.create_dataset("SmoothingLength", data=gas_parts['smoothing_length'], dtype="f")
+grp.create_dataset("InternalEnergy", data=gas_parts['internal_energy'], dtype="f")
+grp.create_dataset("ParticleIDs", data=np.arange(0, len(gas_parts['particle_mass'])))
+grp.create_dataset("Density", data=gas_parts['density'], dtype="f")
 
 
 grp = IC.create_group("/PartType1")
@@ -185,6 +173,3 @@ grp.create_dataset("Coordinates",  data=sun_coords, dtype="f")
 grp.create_dataset("Velocities", data=sun_vel, dtype="f")
 grp.create_dataset("Masses", data=sun_mass, dtype="f")
 grp.create_dataset("ParticleIDs", data=np.arange(len(gas_parts['particle_mass']), len(gas_parts['particle_mass'])+int(1)))
-
-IC.close()
-
