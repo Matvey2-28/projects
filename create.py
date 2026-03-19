@@ -74,14 +74,11 @@ def create_regular_dist_model(temperature, # Температура, К
     num_part = len(pos_xy)
     pos = np.array(pos_xy)
     vel = np.array(vel_xy)
-    
-    def temperature_gen(temperature):
-        r = np.linspace(0, radius_exterior)
-        temps = temperature * np.sqrt(r ** 2 / (4 * AU ** 2)) 
+    r = np.linspace(radius_exterior-radius_interior, radius_exterior, num_part)
+    temperatures = temperature * np.sqrt(r ** 2 / (4 * AU ** 2)) 
         
-        return temps
     
-    T = np.array([temperature_gen(d) for d in pos])
+    T = np.array([temperatures])
     rho = np.full(num_part, n_H * m_H)
     P = R / MU_H * rho * T
     u = 3  * k * T / m_H / 2
