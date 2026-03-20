@@ -76,12 +76,12 @@ def create_regular_dist_model(temperature, # Температура, К
     vel = np.array(vel_xy)
     r = np.linspace(radius_exterior-radius_interior, radius_exterior, num_part)
     temperatures = temperature * np.sqrt(r ** 2 / (4 * AU ** 2)) 
-        
+    densities = n_H * m_H * np.sqrt(r ** 2 / (4 * AU ** 2)) 
     
     T = np.array([temperatures])
-    rho = np.full(num_part, n_H * m_H)
+    rho = np.array([densities])
     P = R / MU_H * rho * T
-    u = 3  * k * T / m_H / 2
+    u = (3 / 2) * k * T / m_H 
 
     V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
     smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
