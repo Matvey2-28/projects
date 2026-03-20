@@ -139,15 +139,21 @@ gas_parts_vel = np.array(tuple(zip(
                 gas_parts['particle_velocity_z'])))
                     
 sun_mass = np.array([M_SUN])
-sun_coords = np.array([box_size/2, box_size/2, 0])
-sun_vel = np.array([0, 0, 0])
+sun_coords = np.array([[box_size/2, box_size/2, 0]])
+sun_vel = np.array([[0, 0, 0]])
+
+test_mass = np.append(gas_parts['particle_mass'], sun_mass)
+test_vel = np.append(gas_parts_vel, sun_vel, axis=0)
+test_coords = np.append(gas_parts_coords, sun_coords, axis=0)
+test_num_part = len(test_mass)
+
 
 IC = h5py.File('./IC.hdf5', 'w')
 grp = IC.create_group("/Header")
 grp.attrs["BoxSize"] = [box_size, box_size, 0]
-grp.attrs["NumPart_Total"] = [len(gas_parts['particle_mass']), 1, 0, 0, 0, 0]
+grp.attrs["NumPart_Total"] = [0, test_num_part, 0, 0, 0, 0]
 grp.attrs["NumPart_Total_HighWord"] = [0, 0, 0, 0, 0, 0]
-grp.attrs["NumPart_ThisFile"] = [len(gas_parts['particle_mass']), 1, 0, 0, 0, 0]
+grp.attrs["NumPart_ThisFile"] = [0, test_num_part, 0, 0, 0, 0]
 grp.attrs["Time"] = 0.0
 grp.attrs["NumFileOutputsPerSnapshot"] = 1
 grp.attrs["MassTable"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -155,8 +161,8 @@ grp.attrs["Flag_Entropy_ICs"] = [0, 0, 0, 0, 0, 0]
 grp.attrs["Dimension"] = 2
 
 grp = IC.create_group("/Units")
-grp.attrs["Unit length in cgs (U_L)"] = 100
-grp.attrs["Unit mass in cgs (U_M)"] = 1000
+grp.attrs["Unit length in cgs (U_L)"] = 1.0
+grp.attrs["Unit mass in cgs (U_M)"] = 1.0
 grp.attrs["Unit time in cgs (U_t)"] = 1.0
 grp.attrs["Unit current in cgs (U_I)"] = 1.0
 grp.attrs["Unit temperature in cgs (U_T)"] = 1.0
@@ -176,6 +182,5 @@ grp.create_dataset("Coordinates",  data=sun_coords, dtype="f")
 grp.create_dataset("Velocities", data=sun_vel, dtype="f")
 grp.create_dataset("Masses", data=sun_mass, dtype="f")
 grp.create_dataset("ParticleIDs", data=np.arange(len(gas_parts['particle_mass']), len(gas_parts['particle_mass'])+int(1)))
-
 
 IC.close()
