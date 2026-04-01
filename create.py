@@ -36,7 +36,7 @@ def coords_generator(r, N):
 
 
 def _vel_calc(x, y):
-    alpha = np.atan2(y, x)
+    alpha = np.arctan2(y, x)
     r = np.sqrt(x**2 + y**2)
     v_x = -np.sqrt(G * M_SUN / r) * np.sin(alpha)
     v_y = np.sqrt(G * M_SUN / r) * np.cos(alpha)
@@ -74,11 +74,14 @@ def create_regular_dist_model(temperature, # Температура, К
     num_part = len(pos_xy)
     pos = np.array(pos_xy)
     vel = np.array(vel_xy)
+    print(pos)
 
     T = np.full(num_part, temperature)
     rho = np.full(num_part, n_H * m_H)
+    intensity = n_H * m_H * 10
+    rho = intensity * np.exp(- 0.5*(pos[:, 0] - 0.9*AU)**2 - 0.5*pos[:, 1]**2) 
     P = R / MU_H * rho * T
-    u = (3  * k * (T / m_H)) / 2
+    u = 3  * k * T / m_H / 2
 
     V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
     smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
@@ -134,7 +137,7 @@ gas_parts_vel = np.array(tuple(zip(
                 gas_parts['particle_velocity_x'], 
                 gas_parts['particle_velocity_y'], 
                 gas_parts['particle_velocity_z'])))
-
+                    
 sun_mass = np.array([M_SUN])
 sun_coords = np.array([[box_size/2, box_size/2, 0]])
 sun_vel = np.array([[0, 0, 0]])
@@ -164,20 +167,14 @@ grp.attrs["Unit time in cgs (U_t)"] = 1.0
 grp.attrs["Unit current in cgs (U_I)"] = 1.0
 grp.attrs["Unit temperature in cgs (U_T)"] = 1.0
 
-# grp = IC.create_group("/PartType1")
-# grp.create_dataset("Coordinates",  data=test_coords, dtype="f")
-# grp.create_dataset("Velocities", data=test_vel, dtype="f")
-# grp.create_dataset("Masses", data=test_mass, dtype="f")
-# grp.create_dataset("ParticleIDs", data=np.arange(0, test_num_part, 1))
-
-# grp = IC.create_group("/PartType1")
-# grp.create_dataset("Coordinates", data=gas_parts_coords, dtype="f")
-# grp.create_dataset("Velocities", data=gas_parts_vel, dtype="f")
-# grp.create_dataset("Masses", data=gas_parts['particle_mass'], dtype="f")
-# grp.create_dataset("SmoothingLength", data=gas_parts['smoothing_length'], dtype="f")
-# grp.create_dataset("InternalEnergy", data=gas_parts['internal_energy'], dtype="f")
-# grp.create_dataset("ParticleIDs", data=np.arange(0, len(gas_parts['particle_mass'])))
-# grp.create_dataset("Density", data=gas_parts['density'], dtype="f")
+grp = IC.create_group("/PartType0")
+grp.create_dataset("Coordinates", data=gas_parts_coords, dtype="f")
+grp.create_dataset("Velocities", data=gas_parts_vel, dtype="f")
+grp.create_dataset("Masses", data=gas_parts['particle_mass'], dtype="f")
+grp.create_dataset("SmoothingLength", data=gas_parts['smoothing_length'], dtype="f")
+grp.create_dataset("InternalEnergy", data=gas_parts['internal_energy'], dtype="f")
+grp.create_dataset("ParticleIDs", data=np.arange(0, len(gas_parts['particle_mass'])))
+grp.create_dataset("Density", data=gas_parts['density'], dtype="f")
 
 
 grp = IC.create_group("/PartType1")
@@ -187,4 +184,3 @@ grp.create_dataset("Masses", data=sun_mass, dtype="f")
 grp.create_dataset("ParticleIDs", data=np.arange(len(gas_parts['particle_mass']), len(gas_parts['particle_mass'])+int(1)))
 
 IC.close()
-
