@@ -75,7 +75,10 @@ def create_regular_dist_model(temperature, # Температура, К
     pos = np.array(pos_xy)
     vel = np.array(vel_xy)
 
-    T = np.full(num_part, temperature)
+    x0 = box_size / 2
+    y0 = box_size / 2
+    
+    T = temperature * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
     rho = np.full(num_part, n_H * m_H)
     P = R / MU_H * rho * T
     u = 3  * k * T / m_H / 2
@@ -176,3 +179,4 @@ grp.create_dataset("ParticleIDs", data=np.arange(len(gas_parts['particle_mass'])
 
 
 
+IC.close()
