@@ -18,33 +18,24 @@
 	},
 	"math_settings": {
 		"X_MIN": {
-			"value": 0.5
-		},
-		"Y_MIN": {
-			"value": 0.5
+			"value": 3
 		},
 		"X_MAX": {
-			"value": 200
-		},
-		"Y_MAX": {
-			"value": 200
+			"value": 150
 		},
 		"X_COORDS": {
-			"value": 30
-		},
-		"Y_COORDS": {
-			"value": 30
+			"value": 150
 		},
 		"MIN_ANGLE": {
-			"value": 0.5
+			"value": 1
 		},
 		"MAX_ANGLE": {
-			"value": 0.5
+			"value": 10
 		},
 		"MIN_RAD": {
 			"value": 0.5
 		},
-		"MAT_FUNCTION": {
+		"MAT_FUNC": {
 			"value": "line"
 		}
 	}

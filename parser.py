@@ -31,5 +31,6 @@ class Parser:
 if __name__ == '__main__':
     parser = Parser('input.json')
     a = parser.get_math_settings()
+    b = parser.get_visual_settings()
     print()
         

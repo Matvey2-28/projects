@@ -1,11 +1,11 @@
 FIELDS:
     PIC_QUALITY:
-        type: integer
+        type: decimal
         title:
             ru: Качество изображения
         hint:
             ru: Введите желаемое качество
-        min: 0
+        min: 100
         max: 1500
         default: 100
 
@@ -15,7 +15,7 @@ FIELDS:
             ru: Название графика
         hint:
             ru: Введите подпись графика
-        default: Super_star
+        default: picture_name
 
     TYPE_OF_FILE:
         type: string
@@ -86,43 +86,92 @@ FIELDS:
               name:
                 ru: Розовый
 
-    N_LAYERS:
-        type: integer
+    X_MIN:
+        type: decimal
         title:
-            ru: Количество слоев
+            ru: Минимальное значение X
         hint:
-            ru: Введите количество слоев
-        min: 0
-        max: 100
+            ru: Введите минимальное значение X
+        min: 0.05
+        max: 999
         default: 3
 
-    N_SECTORS:
-        type: integer
+    X_MAX:
+        type: decimal
         title:
-            ru: Количество секторов
+            ru: Максимальное значение X
         hint:
-            ru: Введите количество секторов
-        min: 0
-        max: 150
-        default: 8
+            ru: Введите максимальное значение X
+        min: 0.06
+        max: 1000
+        default: 150
+
+    X_COORDS:
+        type: decimal
+        title:
+            ru: Количество координат по оси X
+        hint:
+            ru: Введите количество координат по оси X
+        min: 0.06
+        max: 1000
+        default: 150
+
+    MIN_ANGLE:
+        type: decimal
+        title:
+            ru: Минимальный угол (для функций требующих угла)
+        hint:
+            ru: Введите значение угла (шаг 0.01)
+        min: 0.001
+        max: 100
+        default: 1
+
+    MAX_ANGLE:
+        type: decimal
+        title:
+            ru: Максимальный угол (для функций требующих угла)
+        hint:
+            ru: Введите значение угла (шаг 0.01)
+        min: 0.1
+        max: 1000
+        default: 10
     
     MIN_RAD:
         type: decimal
         title:
-            ru: Минимальный радиус
+            ru: Минимальный радиус (для функций требующих радиуса)
         hint:
-            ru: Введите значение радиуса (шаг 0.01)
-        min: 0.01
-        max: 0.94
+            ru: Введите значение радиуса 
+        min: 0.001
+        max: 10000
         default: 0.50
 
-    GRID:
-        type: boolean
+    MAT_FUNC:
+        type: string
+        title: 
+            ru: Математическая функция
         hint:
-            ru: Выбрав этот пункт, вы подключаете сетку к изображению
-        title:  
-            ru: Сетка
-        default: False
+            ru: Выберите по какой математической функции будет строиться ваш график
+        default: 'line'
+        enum:
+          - value: 'line'
+            name: 
+              ru: Прямая
+          - value: 'parabola'
+            name:
+              ru: Парабола
+          - value: 'giperbola'
+            name:
+              ru: Гипербола
+          - value: 'circle'
+            name:
+              ru: Окружность
+          - value: 'log_sp'
+            name:
+              ru: Логарифмическая спираль
+          - value: 'astroid'
+            name:
+              ru: Астроид
         
 
 STRUCTURE:
@@ -138,17 +187,21 @@ STRUCTURE:
             - field: LINE_COLOR
               view: dropdown
             - field: PIC_QUALITY
-            - field: GRID
-
 
 - group:
         key: math_settings
         title:  
             ru: Математические настройки графика
         fields:
-            - field: N_LAYERS
-            - field: N_SECTORS
-            - field: MIN_RAD    
+            - field: X_MIN
+            - field: X_MAX
+            - field: X_COORDS
+              width: full
+            - field: MIN_ANGLE
+            - field: MAX_ANGLE
+            - field: MIN_RAD 
+            - field: MAT_FUNC
+              view: dropdown
 
 
 UNITS:
