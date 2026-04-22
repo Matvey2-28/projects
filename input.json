@@ -1,0 +1,51 @@
+{
+	"visual_settings": {
+		"GRAPHIC_NAME": {
+			"value": "picture_name"
+		},
+		"TYPE_OF_FILE": {
+			"value": ".png"
+		},
+		"MARKER_COLOR": {
+			"value": "black"
+		},
+		"LINE_COLOR": {
+			"value": "black"
+		},
+		"PIC_QUALITY": {
+			"value": 100
+		}
+	},
+	"math_settings": {
+		"X_MIN": {
+			"value": 0.5
+		},
+		"Y_MIN": {
+			"value": 0.5
+		},
+		"X_MAX": {
+			"value": 200
+		},
+		"Y_MAX": {
+			"value": 200
+		},
+		"X_COORDS": {
+			"value": 30
+		},
+		"Y_COORDS": {
+			"value": 30
+		},
+		"MIN_ANGLE": {
+			"value": 0.5
+		},
+		"MAX_ANGLE": {
+			"value": 0.5
+		},
+		"MIN_RAD": {
+			"value": 0.5
+		},
+		"MAT_FUNCTION": {
+			"value": "line"
+		}
+	}
+}

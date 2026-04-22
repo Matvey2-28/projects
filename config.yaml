@@ -1,0 +1,171 @@
+FIELDS:
+    PIC_QUALITY:
+        type: integer
+        title:
+            ru: Качество изображения
+        hint:
+            ru: Введите желаемое качество
+        min: 0
+        max: 1500
+        default: 100
+
+    GRAPHIC_NAME:
+        type: string
+        title:  
+            ru: Название графика
+        hint:
+            ru: Введите подпись графика
+        default: Super_star
+
+    TYPE_OF_FILE:
+        type: string
+        title:  
+            ru: Тип файла
+        hint:
+            ru: Выберите подходящее под ваши цели расширение файла
+        enum:
+            - value: '.png'
+              name:
+                  ru: .png
+            - value: '.jpg'
+              name:
+                  ru: .jpg
+        default: '.png'
+
+    MARKER_COLOR:
+            type: string
+            title:  
+                ru: Цвет маркера
+            hint:
+                ru: Выберите из выпадающего списка цвет для обозначения маркеров
+            default: 'black'
+            enum:
+              - value: 'black'
+                name:
+                  ru: Чёрный
+              - value: 'red'
+                name:
+                  ru: Красный
+              - value: 'blue'
+                name:
+                  ru: Синий
+              - value: 'green'
+                name:
+                  ru: Зелёный
+              - value: 'yellow'
+                name:
+                  ru: Жёлтый
+              - value: 'pink'
+                name:
+                  ru: Розовый
+
+    LINE_COLOR:
+          type: string
+          title:  
+              ru: Цвет линии
+          hint:
+              ru: Выберите из выпадающего списка цвет для обозначения линий
+          default: 'black'
+          enum:
+            - value: 'black'
+              name:
+                ru: Чёрный
+            - value: 'red'
+              name:
+                ru: Красный
+            - value: 'blue'
+              name:
+                ru: Синий
+            - value: 'green'
+              name:
+                ru: Зелёный
+            - value: 'yellow'
+              name:
+                ru: Жёлтый
+            - value: 'pink'
+              name:
+                ru: Розовый
+
+    N_LAYERS:
+        type: integer
+        title:
+            ru: Количество слоев
+        hint:
+            ru: Введите количество слоев
+        min: 0
+        max: 100
+        default: 3
+
+    N_SECTORS:
+        type: integer
+        title:
+            ru: Количество секторов
+        hint:
+            ru: Введите количество секторов
+        min: 0
+        max: 150
+        default: 8
+    
+    MIN_RAD:
+        type: decimal
+        title:
+            ru: Минимальный радиус
+        hint:
+            ru: Введите значение радиуса (шаг 0.01)
+        min: 0.01
+        max: 0.94
+        default: 0.50
+
+    GRID:
+        type: boolean
+        hint:
+            ru: Выбрав этот пункт, вы подключаете сетку к изображению
+        title:  
+            ru: Сетка
+        default: False
+        
+
+STRUCTURE:
+- group:
+        key: visual_settings
+        title:  
+            ru: Визуальные настройки графика
+        fields:         
+            - field: GRAPHIC_NAME
+            - field: TYPE_OF_FILE
+            - field: MARKER_COLOR
+              view: dropdown
+            - field: LINE_COLOR
+              view: dropdown
+            - field: PIC_QUALITY
+            - field: GRID
+
+
+- group:
+        key: math_settings
+        title:  
+            ru: Математические настройки графика
+        fields:
+            - field: N_LAYERS
+            - field: N_SECTORS
+            - field: MIN_RAD    
+
+
+UNITS:
+    lenght:
+        m:
+            title:
+                ru: Метры
+            cm: 1
+        mm:
+            title:
+                ru: Сантиметры
+            m: 0.001
+        cm:
+            title:
+                ru: Сантиметры
+            m: 0.01
+        km:
+            title:
+                ru: Сантиметры
+            m: 1000
