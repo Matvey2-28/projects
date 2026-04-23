@@ -6,9 +6,6 @@
 		"TYPE_OF_FILE": {
 			"value": ".png"
 		},
-		"MARKER_COLOR": {
-			"value": "black"
-		},
 		"LINE_COLOR": {
 			"value": "black"
 		},
@@ -36,7 +33,7 @@
 			"value": 0.5
 		},
 		"MAT_FUNC": {
-			"value": "line"
+			"value": "Circle"
 		}
 	}
 }

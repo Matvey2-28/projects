@@ -7,9 +7,8 @@ class Solver:
         visual_settings = model_data.get_visual_settings()
         self.GRAPHIC_NAME = visual_settings[0]
         self.TYPE_OF_FILE = visual_settings[1]
-        self.MARKER_COLOR = visual_settings[2]
-        self.LINE_COLOR = visual_settings[3]
-        self.PIC_QUALITY = visual_settings[4]
+        self.LINE_COLOR = visual_settings[2]
+        self.PIC_QUALITY = visual_settings[3]
     
         math_settings = model_data.get_math_settings()
         self.X_MIN = math_settings[0]
@@ -20,34 +19,34 @@ class Solver:
         self.MIN_RAD = math_settings[5]
         self.MAT_FUNC = math_settings[6]
         
-    def solve(self):
+    def solve(self, output_path: str):
         
-        def line(X_MIN, X_MAX, X_COORDS):
-            x = np.lispace(self.X_MIN, self.X_MAX, self.X_COORDS)
+        def line():
+            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
             y = x
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def parabola(X_MIN, X_MAX, X_COORDS):
-            x = np.lispace(self.X_MIN, self.X_MAX, self.X_COORDS)
+        def parabola():
+            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
             y = x ** 2
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def giperbola(X_MIN, X_MAX, X_COORDS):
-            x = np.lispace(self.X_MIN, self.X_MAX, self.X_COORDS)
-            y = 1 / x
+        def hiperbola():
+            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
+            y = 1 / x + 1
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def circle(MIN_RAD, MIN_ANGLE, MAX_ANGLE):
+        def circle():
             alpha = np.arange(self.MIN_ANGLE, self.MAX_ANGLE, 0.01)
             x = np.cos(alpha) * self.MIN_RAD
             y = np.sin(alpha) * self.MIN_RAD
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def log_sp(MIN_ANGLE, MAX_ANGLE):
+        def log_sp():
             k = 0.5
             alpha = np.arange(self.MIN_ANGLE, self.MAX_ANGLE, 0.01)
             r = np.exp(k * alpha)
@@ -55,25 +54,37 @@ class Solver:
             x = r * np.cos(alpha)
             y = r * np.sin(alpha)
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def astroid(MIN_RAD):
+        def astroid():
             t = np.arange(-2 * (self.MIN_RAD / 4), 2 * self.MIN_RAD)
             
-            x = R * np.cos(t) ** 3
-            y = R * np.sin(t) ** 3
+            x = self.MIN_RAD * np.cos(t) ** 3
+            y = self.MIN_RAD * np.sin(t) ** 3
             
-            return x, y
+            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        if self.MAT_FUNC == 'line':
-            plt.plot(line(), color=self.LINE_COLOR, markerfacecolor=self.MARKER_COLOR)
-            plt.savefig(self.GRAPHIC_NAME+self.TYPE_OF_FILE, self.PIC_QUALITY)
+        if self.MAT_FUNC == 'Line':
+           line()
+                   
+        elif self.MAT_FUNC == 'Parabola':
+            parabola()
             
-        elif self.MAT_FUNC == 'parabola':
-            plt.plot(line(), color=self.LINE_COLOR, markerfacecolor=self.MARKER_COLOR)
-
+        elif self.MAT_FUNC == 'Hiperbola':
+            hiperbola()
             
+        elif self.MAT_FUNC == 'Circle':
+            circle()
             
+        elif self.MAT_FUNC == 'Log spiral':
+            log_sp()
+            
+        elif self.MAT_FUNC == 'Astroid':
+            astroid()
+            
+        plt.axis('equal')
+        plt.savefig(output_path + '/' + self.GRAPHIC_NAME + self.TYPE_OF_FILE, dpi = self.PIC_QUALITY)
+        
             
             
             

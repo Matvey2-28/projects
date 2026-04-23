@@ -32,33 +32,7 @@ FIELDS:
                   ru: .jpg
         default: '.png'
 
-    MARKER_COLOR:
-            type: string
-            title:  
-                ru: Цвет маркера
-            hint:
-                ru: Выберите из выпадающего списка цвет для обозначения маркеров
-            default: 'black'
-            enum:
-              - value: 'black'
-                name:
-                  ru: Чёрный
-              - value: 'red'
-                name:
-                  ru: Красный
-              - value: 'blue'
-                name:
-                  ru: Синий
-              - value: 'green'
-                name:
-                  ru: Зелёный
-              - value: 'yellow'
-                name:
-                  ru: Жёлтый
-              - value: 'pink'
-                name:
-                  ru: Розовый
-
+    
     LINE_COLOR:
           type: string
           title:  
@@ -92,8 +66,8 @@ FIELDS:
             ru: Минимальное значение X
         hint:
             ru: Введите минимальное значение X
-        min: 0.05
-        max: 999
+        min: -5001
+        max: 5000
         default: 3
 
     X_MAX:
@@ -102,8 +76,8 @@ FIELDS:
             ru: Максимальное значение X
         hint:
             ru: Введите максимальное значение X
-        min: 0.06
-        max: 1000
+        min: -5000
+        max: 5001
         default: 150
 
     X_COORDS:
@@ -112,7 +86,7 @@ FIELDS:
             ru: Количество координат по оси X
         hint:
             ru: Введите количество координат по оси X
-        min: 0.06
+        min: 10
         max: 1000
         default: 150
 
@@ -152,24 +126,24 @@ FIELDS:
             ru: Математическая функция
         hint:
             ru: Выберите по какой математической функции будет строиться ваш график
-        default: 'line'
+        default: 'Line'
         enum:
-          - value: 'line'
+          - value: 'Line'
             name: 
               ru: Прямая
-          - value: 'parabola'
+          - value: 'Parabola'
             name:
               ru: Парабола
-          - value: 'giperbola'
+          - value: 'Hiperbola'
             name:
               ru: Гипербола
-          - value: 'circle'
+          - value: 'Circle'
             name:
               ru: Окружность
-          - value: 'log_sp'
+          - value: 'Log spiral'
             name:
               ru: Логарифмическая спираль
-          - value: 'astroid'
+          - value: 'Astroid'
             name:
               ru: Астроид
         
@@ -182,8 +156,6 @@ STRUCTURE:
         fields:         
             - field: GRAPHIC_NAME
             - field: TYPE_OF_FILE
-            - field: MARKER_COLOR
-              view: dropdown
             - field: LINE_COLOR
               view: dropdown
             - field: PIC_QUALITY
