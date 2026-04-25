@@ -1,39 +1,22 @@
 {
-	"visual_settings": {
-		"GRAPHIC_NAME": {
-			"value": "picture_name"
+	"phys_settings": {
+		"DIMENSION": {
+			"value": "3D"
 		},
-		"TYPE_OF_FILE": {
-			"value": ".png"
-		},
-		"LINE_COLOR": {
-			"value": "black"
-		},
-		"PIC_QUALITY": {
+		"T_MIN": {
 			"value": 100
-		}
-	},
-	"math_settings": {
-		"X_MIN": {
-			"value": 3
 		},
-		"X_MAX": {
+		"RAD_EX": {
 			"value": 150
 		},
-		"X_COORDS": {
+		"RAD_IN": {
+			"value": 100
+		},
+		"M": {
 			"value": 150
 		},
-		"MIN_ANGLE": {
-			"value": 1
-		},
-		"MAX_ANGLE": {
-			"value": 10
-		},
-		"MIN_RAD": {
-			"value": 5
-		},
-		"MAT_FUNC": {
-			"value": "Astroid"
+		"DEC_STEP_M": {
+			"value": 24
 		}
 	}
 }

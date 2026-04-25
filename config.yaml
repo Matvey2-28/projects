@@ -1,179 +1,81 @@
 FIELDS:
-    PIC_QUALITY:
+
+    T_MIN:
         type: decimal
         title:
-            ru: Качество изображения
+            ru: Начальное значение температуры
         hint:
-            ru: Введите желаемое качество
-        min: 100
-        max: 1500
+            ru: Введите начальное значение температуры тела в Кельвинах
         default: 100
 
-    GRAPHIC_NAME:
-        type: string
-        title:  
-            ru: Название графика
-        hint:
-            ru: Введите подпись графика
-        default: picture_name
-
-    TYPE_OF_FILE:
-        type: string
-        title:  
-            ru: Тип файла
-        hint:
-            ru: Выберите подходящее под ваши цели расширение файла
-        enum:
-            - value: '.png'
-              name:
-                  ru: .png
-            - value: '.jpg'
-              name:
-                  ru: .jpg
-        default: '.png'
-
-    
-    LINE_COLOR:
-          type: string
-          title:  
-              ru: Цвет линии
-          hint:
-              ru: Выберите из выпадающего списка цвет для обозначения линий
-          default: 'black'
-          enum:
-            - value: 'black'
-              name:
-                ru: Чёрный
-            - value: 'red'
-              name:
-                ru: Красный
-            - value: 'blue'
-              name:
-                ru: Синий
-            - value: 'green'
-              name:
-                ru: Зелёный
-            - value: 'yellow'
-              name:
-                ru: Жёлтый
-            - value: 'pink'
-              name:
-                ru: Розовый
-
-    X_MIN:
+    RAD_EX:
         type: decimal
         title:
-            ru: Минимальное значение X
+            ru: Внешний радиус
         hint:
-            ru: Введите минимальное значение X
-        min: -5001
-        max: 5000
-        default: 3
-
-    X_MAX:
-        type: decimal
-        title:
-            ru: Максимальное значение X
-        hint:
-            ru: Введите максимальное значение X
-        min: -5000
-        max: 5001
+            ru: Введите значение внешнего радиуса тела в астрономических единицах
+        min: 1
         default: 150
 
-    X_COORDS:
+    RAD_IN:
         type: decimal
         title:
-            ru: Количество координат по оси X
+            ru: Внутренний радиус
         hint:
-            ru: Введите количество координат по оси X
-        min: 10
-        max: 1000
+            ru: Введите значение внутреннего радиуса тела в астрономических единицах
+        min: 1
+        default: 100
+
+    M:
+        type: decimal
+        title:
+            ru: Масса 
+        hint:
+            ru: Введите массу тела в кг
+        min: 1
         default: 150
-
-    MIN_ANGLE:
-        type: decimal
-        title:
-            ru: Минимальный угол (для функций требующих угла)
-        hint:
-            ru: Введите значение угла (шаг 0.01)
-        min: 0.001
-        max: 100
-        default: 1
-
-    MAX_ANGLE:
-        type: decimal
-        title:
-            ru: Максимальный угол (для функций требующих угла)
-        hint:
-            ru: Введите значение угла (шаг 0.01)
-        min: 0.1
-        max: 1000
-        default: 10
-    
-    MIN_RAD:
-        type: decimal
-        title:
-            ru: Минимальный радиус (для функций требующих радиуса)
-        hint:
-            ru: Введите значение радиуса 
-        min: 0.001
-        max: 10000
-        default: 0.50
-
-    MAT_FUNC:
-        type: string
-        title: 
-            ru: Математическая функция
-        hint:
-            ru: Выберите по какой математической функции будет строиться ваш график
-        default: 'Line'
-        enum:
-          - value: 'Line'
-            name: 
-              ru: Прямая
-          - value: 'Parabola'
-            name:
-              ru: Парабола
-          - value: 'Hiperbola'
-            name:
-              ru: Гипербола
-          - value: 'Circle'
-            name:
-              ru: Окружность
-          - value: 'Log spiral'
-            name:
-              ru: Логарифмическая спираль
-          - value: 'Astroid'
-            name:
-              ru: Астроид
         
+    DEC_STEP_M:
+        type: decimal
+        title:
+            ru: Степень десяти для массы
+        hint:
+            ru: В какой степени десяти измеряется масса тела
+        min: 1
+        default: 24
+
+    DIMENSION:
+        type: string
+        title:
+            ru: Графика
+        hint:
+            ru: В какой графике будет строиться фигура
+        default: '3D'
+        enum:
+          - value: '3D'
+            name:
+                ru: 3D
+          - value: '2D'
+            name:
+                ru: 2D
+        
+    
 
 STRUCTURE:
-- group:
-        key: visual_settings
-        title:  
-            ru: Визуальные настройки графика
-        fields:         
-            - field: GRAPHIC_NAME
-            - field: TYPE_OF_FILE
-            - field: LINE_COLOR
-              view: dropdown
-            - field: PIC_QUALITY
 
 - group:
-        key: math_settings
+        key: phys_settings
         title:  
-            ru: Математические настройки графика
+            ru: Физические параметры тела
         fields:
-            - field: X_MIN
-            - field: X_MAX
-            - field: X_COORDS
+            - field: DIMENSION
+            - field: T_MIN
               width: full
-            - field: MIN_ANGLE
-            - field: MAX_ANGLE
-            - field: MIN_RAD 
-            - field: MAT_FUNC
-              view: dropdown
+            - field: RAD_EX
+            - field: RAD_IN
+            - field: M
+            - field: DEC_STEP_M
+            
 
 
 UNITS:
