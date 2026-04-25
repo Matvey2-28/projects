@@ -30,10 +30,10 @@
 			"value": 10
 		},
 		"MIN_RAD": {
-			"value": 0.5
+			"value": 5
 		},
 		"MAT_FUNC": {
-			"value": "Circle"
+			"value": "Astroid"
 		}
 	}
 }

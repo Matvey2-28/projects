@@ -57,7 +57,7 @@ class Solver:
             plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
         def astroid():
-            t = np.arange(-2 * (self.MIN_RAD / 4), 2 * self.MIN_RAD)
+            t = np.arange(-2 * (self.MIN_RAD / 4), 2 * self.MIN_RAD, 0.1)
             
             x = self.MIN_RAD * np.cos(t) ** 3
             y = self.MIN_RAD * np.sin(t) ** 3
