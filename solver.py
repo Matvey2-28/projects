@@ -4,86 +4,96 @@ import numpy as np
 class Solver:
     
     def __init__(self, model_data):
-        visual_settings = model_data.get_visual_settings()
-        self.GRAPHIC_NAME = visual_settings[0]
-        self.TYPE_OF_FILE = visual_settings[1]
-        self.LINE_COLOR = visual_settings[2]
-        self.PIC_QUALITY = visual_settings[3]
     
-        math_settings = model_data.get_math_settings()
-        self.X_MIN = math_settings[0]
-        self.X_MAX = math_settings[1]
-        self.X_COORDS = math_settings[2]
-        self.MIN_ANGLE = math_settings[3]
-        self.MAX_ANGLE = math_settings[4]
-        self.MIN_RAD = math_settings[5]
-        self.MAT_FUNC = math_settings[6]
+        phys_settings = model_data.get_physical_settings()
+        self.DIMENSION = math_settings[0]
+        self.T_MIN = math_settings[1]
+        self.RAD_EX = math_settings[2]
+        self.RAD_IN = math_settings[3]
+        self.MASS = math_settings[4]
+        self.DEC_STEP = math_settings[5]
+        
+        
         
     def solve(self, output_path: str):
         
-        def line():
-            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
-            y = x
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
+        AU = 1.49e11 # Астрономическая единица, м
+        G = 6.67e-11 # Гравитационная постоянная, м^3/(кг*с^2)
+        GAMMA = 5.0 / 3.0 # Постоянная адиобатты
+        m_H = 2 * 1.6735575e-27 # Масса молекулы водорода, кг
+        n_H = 2e+12  # Характерная концентрация газа, частиц/м^3
+        MU_H = 0.002  # Молярная масса водорода, кг/моль
+        R = 8.3144598  # Газовая постоянная, Дж/(моль*К)
+        N_a = 6.0221409e+23 # Число Авогадро 
+        k = 1.38064852e-23 # Больцманская постоянная
+        ETA = 1.2348 # Коэффициент среднего расстояния между частицами SPH
+
         
-        def parabola():
-            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
-            y = x ** 2
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
+        r_exterior = self.RAD_EX * AU
+        r_interior = self.RAD_IN * AU
+        temperature = self.T_MIN
+        M = self.MASS * 10 ** self.DEC_STEP
         
-        def hiperbola():
-            x = np.linspace(self.X_MIN, self.X_MAX, self.X_COORDS)
-            y = 1 / x + 1
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def circle():
-            alpha = np.arange(self.MIN_ANGLE, self.MAX_ANGLE, 0.01)
-            x = np.cos(alpha) * self.MIN_RAD
-            y = np.sin(alpha) * self.MIN_RAD
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
         
-        def log_sp():
-            k = 0.5
-            alpha = np.arange(self.MIN_ANGLE, self.MAX_ANGLE, 0.01)
-            r = np.exp(k * alpha)
+        def 3D_graph():
             
-            x = r * np.cos(alpha)
-            y = r * np.sin(alpha)
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
+            num_part = len(pos_xy)
+            pos = np.array(pos_xy)
+            vel = np.array(vel_xy)
         
-        def astroid():
-            t = np.arange(-2 * (self.MIN_RAD / 4), 2 * self.MIN_RAD, 0.1)
-            
-            x = self.MIN_RAD * np.cos(t) ** 3
-            y = self.MIN_RAD * np.sin(t) ** 3
-            
-            plt.plot(x, y, color=self.LINE_COLOR, label=self.MAT_FUNC)
+            T = np.full(num_part, temperature)
+            rho = np.full(num_part, n_H * m_H)
+            P = R / MU_H * rho * T
+            u = 3  * k * T / m_H / 2
         
-        if self.MAT_FUNC == 'Line':
-           line()
-                   
-        elif self.MAT_FUNC == 'Parabola':
-            parabola()
+            V_disk = np.pi * (r_exterior ** 2 - r_interior ** 2) * thickness
+            smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
+        
+            masses = V_disk / num_part * rho
+        
+            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
+            vel_star = np.array([[0, 0, 0]])
+            mass_star = np.array([M])
+            return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+                    (pos, vel, masses, pos_star, vel_star, mass_star))
+
             
-        elif self.MAT_FUNC == 'Hiperbola':
-            hiperbola()
             
-        elif self.MAT_FUNC == 'Circle':
-            circle()
+           
+        def 2D_graph():
             
-        elif self.MAT_FUNC == 'Log spiral':
-            log_sp()
+            num_part = len(pos_xy)
+            pos = np.array(pos_xy)
+            vel = np.array(vel_xy)
+        
+            T = np.full(num_part, temperature)
+            rho = np.full(num_part, n_H * m_H)
+            P = R / MU_H * rho * T
+            u = 3  * k * T / m_H / 2
+        
+            V_disk = np.pi * (r_exterior ** 2 - r_interior ** 2) * thickness
+            smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
+        
+            masses = V_disk / num_part * rho
+        
+            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
+            vel_star = np.array([[0, 0, 0]])
+            mass_star = np.array([M])
+            return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+                    (pos, vel, masses, pos_star, vel_star, mass_star))
+
             
-        elif self.MAT_FUNC == 'Astroid':
-            astroid()
             
-        plt.axis('equal')
-        plt.savefig(output_path + '/' + self.GRAPHIC_NAME + self.TYPE_OF_FILE, dpi = self.PIC_QUALITY)
+        DIM = self.DIMENSION
+            
+        if DIM == '3D':
+            3D_graph()
+        
+        else:
+            2D_graph()
+        
+            
         
             
             
