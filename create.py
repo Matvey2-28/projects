@@ -91,6 +91,8 @@ def create_regular_dist_model(temperature, # Температура, К
     pos_star = np.array([[box_size / 2, box_size / 2, 0]])
     vel_star = np.array([[0, 0, 0]])
     mass_star = np.array([M_SUN])
+    
+    print(len(pos_xy))
 
     return ((pos, vel, masses, u, P, T, rho, smth_lnght),
             (pos, vel, masses, pos_star, vel_star, mass_star))
