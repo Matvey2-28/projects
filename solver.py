@@ -58,8 +58,8 @@ class Solver:
             def _vel_calc(x, y):
                 alpha = np.atan2(y, x)
                 r = np.sqrt(x**2 + y**2)
-                v_x = -np.sqrt(G * M_SUN / r) * np.sin(alpha)
-                v_y = np.sqrt(G * M_SUN / r) * np.cos(alpha)
+                v_x = -np.sqrt(G * M / r) * np.sin(alpha)
+                v_y = np.sqrt(G * M / r) * np.cos(alpha)
                 return v_x, v_y
             
             
