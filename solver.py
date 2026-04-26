@@ -52,8 +52,7 @@ class Solver:
                 phi = np.linspace(0, 2*np.pi, N)
                 x = r * np.cos(phi)
                 y = r * np.sin(phi)
-                z = np.zeros(N)
-                return np.array(list(zip(x, y, z)))
+                return np.array(list(zip(x, y)))
             
             
             def _vel_calc(x, y):
@@ -78,28 +77,20 @@ class Solver:
                 x_pictures_limits = [-radius_exterior, radius_exterior]
                 y_pictures_limits = [-radius_exterior, radius_exterior]
             
-                pos_xyz = []
-                vel_xyz = []
+                pos_xy = []
+                vel_xy = []
             
                 for x in np.linspace(*x_pictures_limits, points_numper_per_side):
                     for y in np.linspace(*y_pictures_limits, points_numper_per_side):
                         p = geom.Point(x, y)
                         if p.within(outer_polygon) and not p.within(inner_polygon):
-                            pos_xyz.append([x + box_size / 2, y + box_size / 2, 0])
+                            pos_xy.append([x + box_size / 2, y + box_size / 2, 0])
                             v_x, v_y = _vel_calc(x, y)
-                            vel_xyz.append([v_x, v_y, 0])
+                            vel_xy.append([v_x, v_y, 0])
                             
-                num_part = len(pos_xyz)
-                pos_1 = np.array(pos_xyz)
-                vel_1 = np.array(vel_xyz)
-                pos_xyz.append(([pos_1[:, 0], pos_1[:, 1], 2])
-                pos_xyz.append(([pos_1[:, 0], pos_1[:, 1], 4]))
-                
-                vel_xyz.append(([vel_1[:, 0], [vel_1[:, 1], 0]))
-                vel_xyz.append(([vel_1[:, 0], [vel_1[:, 1], 0]))
-                
-                pos = np.array(pos_xyz)
-                vel = np.array(vel_xyz)
+                num_part = len(pos_xy)
+                pos = np.array(pos_xy)
+                vel = np.array(vel_xy)
                 
                 x0 = box_size / 2
                 y0 = box_size / 2
