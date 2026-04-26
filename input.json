@@ -1,16 +1,13 @@
 {
 	"phys_settings": {
-		"DIMENSION": {
-			"value": "3D"
-		},
 		"T_MIN": {
 			"value": 100
 		},
 		"RAD_EX": {
-			"value": 150
+			"value": 1.2
 		},
 		"RAD_IN": {
-			"value": 100
+			"value": 0.6
 		},
 		"M": {
 			"value": 150
