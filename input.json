@@ -1,19 +1,25 @@
 {
-	"phys_settings": {
+	"phys_set": {
+		"PHYS_FUNC": {
+			"value": "bell"
+		},
+		"VEL": {
+			"value": "counterclockwise"
+		},
 		"T_MIN": {
 			"value": 100
 		},
-		"RAD_EX": {
-			"value": 1.2
-		},
-		"RAD_IN": {
-			"value": 0.6
+		"RHO_MIN": {
+			"value": 100
 		},
 		"M": {
 			"value": 150
 		},
 		"DEC_STEP_M": {
 			"value": 24
+		},
+		"VEL_3D": {
+			"value": "clockwise"
 		}
 	}
 }

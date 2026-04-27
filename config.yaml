@@ -1,58 +1,91 @@
 FIELDS:
 
-    PHYS_PAR:
-      title:
-        ru: Определить физические параметры
-      type: object
+      T_MIN:
+          type: decimal
+          title:
+              ru: Начальное значение температуры
+          hint:
+              ru: Введите начальное значение температуры тела в Кельвинах
+          default: 100
 
-      FIELDS:
+      VEL:
+          type: string
+          title:
+              ru: Направление скорости частиц
+          hint:
+              ru: По какому направлению относитьельно тела будут двигаться частицы
+          default: 'clockwise'
+          enum:
+            - value: 'clockwise'
+              name:
+                  ru: По часовой стрелке
+            - value: 'counterclockwise'
+              name:
+                  ru: Против часовой стрелки
 
-          T_MIN:
-              type: decimal
-              title:
-                  ru: Начальное значение температуры
-              hint:
-                  ru: Введите начальное значение температуры тела в Кельвинах
-              default: 100
+      VEL_3D:
+          type: string
+          title:
+              ru: Направление скорости частиц
+          hint:
+              ru: По какому направлению относитьельно тела будут двигаться частицы
+          default: 'clockwise'
+          enum:
+            - value: 'clockwise'
+              name:
+                  ru: По часовой стрелке
+            - value: 'counterclockwise'
+              name:
+                  ru: Против часовой стрелки
+            - value: 'up-circle'
+              name:
+                  ru: Вверх по кругу
+            - value: 'down-circle'
+              name:
+                  ru: Вниз по кругу
+
+      PHYS_FUNC:
+          type: string
+          title:
+              ru: Физическая функция
+          hint:
+              ru: Введите по какой математической функции будут строиться температуры и плотности
+          default: 'bell'
+          enum:
+            - value: 'bell'
+              name:
+                  ru: Функция Белла
+            - value: 'radius'
+              name:
+                  ru: Радиус-функция
+            
       
-          RHO_MIN:
-              type: decimal
-              title:
-                  ru: Начальное значение плотности
-              hint:
-                  ru: Введите начальное значение температуры тела в Кельвинах
-              default: 100
+      RHO_MIN:
+          type: decimal
+          title:
+              ru: Начальное значение плотности
+          hint:
+              ru: Введите начальное значение температуры тела в Кельвинах
+          default: 100
       
-          M:
-              type: decimal
-              title:
-                  ru: Масса 
-              hint:
-                  ru: Введите массу тела в кг
-              min: 1
-              default: 150
+      M:
+          type: decimal
+          title:
+              ru: Масса 
+          hint:
+              ru: Введите массу тела в кг
+          min: 1
+          default: 150
               
-          DEC_STEP_M:
-              type: decimal
-              title:
-                  ru: Степень десяти для массы
-              hint:
-                  ru: В какой степени десяти измеряется масса тела
-              min: 1
-              default: 24
+      DEC_STEP_M:
+          type: decimal
+          title:
+              ru: Степень десяти для массы
+          hint:
+              ru: В какой степени десяти измеряется масса тела
+          min: 1
+          default: 24
 
-      STRUCTURE:
-          - group:
-              key: phys_settings
-              title:  
-                  ru: Физические параметры тела
-              fields:
-                  - field: T_MIN
-                    width: full
-                  - field: RHO_MIN
-                    width: full
-                  - field: M
-                  - field: DEC_STEP_M
     
 
 STRUCTURE:
@@ -64,9 +97,45 @@ STRUCTURE:
         fields:
             - separator:
                 title:
-                  ru: Добавление тела и его физических параметров
-            - field: PHYS_PAR
+                  ru: Определение функции по которой будет идти расстановка температур и плотностей
+            - field: PHYS_FUNC
               width: full
+            - separator:
+                title:
+                  ru: Диск
+            - field: VEL
+              width: full
+              view: dropdown
+            - field: T_MIN
+              width: full
+            - field: RHO_MIN
+              width: full
+            - field: M
+            - field: DEC_STEP_M
+            - separator:
+                title:
+                  ru: Шар
+            - field: VEL_3D
+              width: full
+              view: dropdown
+            - field: T_MIN
+              width: full
+            - field: RHO_MIN
+              width: full
+            - field: M
+            - field: DEC_STEP_M
+            - separator:
+                title:
+                  ru: Туманность
+            - field: VEL_3D
+              width: full
+              view: dropdown
+            - field: T_MIN
+              width: full
+            - field: RHO_MIN
+              width: full
+            - field: M
+            - field: DEC_STEP_M
     
             
             
