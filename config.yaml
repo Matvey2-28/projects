@@ -23,7 +23,28 @@ FIELDS:
               name:
                   ru: Против часовой стрелки
 
-      VEL_3D:
+      VEL_3D_SPHERE:
+          type: string
+          title:
+              ru: Направление скорости частиц
+          hint:
+              ru: По какому направлению относитьельно тела будут двигаться частицы
+          default: 'clockwise'
+          enum:
+            - value: 'clockwise'
+              name:
+                  ru: По часовой стрелке
+            - value: 'counterclockwise'
+              name:
+                  ru: Против часовой стрелки
+            - value: 'up-circle'
+              name:
+                  ru: Вверх по кругу
+            - value: 'down-circle'
+              name:
+                  ru: Вниз по кругу
+
+      VEL_3D_NEBULA:
           type: string
           title:
               ru: Направление скорости частиц
@@ -115,7 +136,7 @@ STRUCTURE:
             - separator:
                 title:
                   ru: Шар
-            - field: VEL_3D
+            - field: VEL_3D_SPHERE
               width: full
               view: dropdown
             - field: T_MIN
@@ -127,7 +148,7 @@ STRUCTURE:
             - separator:
                 title:
                   ru: Туманность
-            - field: VEL_3D
+            - field: VEL_3D_NEBULA
               width: full
               view: dropdown
             - field: T_MIN

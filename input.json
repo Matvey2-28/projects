@@ -18,8 +18,11 @@
 		"DEC_STEP_M": {
 			"value": 24
 		},
-		"VEL_3D": {
+		"VEL_3D_SPHERE": {
 			"value": "clockwise"
+		},
+		"VEL_3D_NEBULA": {
+			"value": "up-circle"
 		}
 	}
 }
