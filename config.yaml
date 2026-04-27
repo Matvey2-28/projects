@@ -1,66 +1,77 @@
 FIELDS:
 
-    T_MIN:
-        type: decimal
-        title:
-            ru: Начальное значение температуры
-        hint:
-            ru: Введите начальное значение температуры тела в Кельвинах
-        default: 100
+    PHYS_PAR:
+      title:
+        ru: Определить физические параметры
+      type: object
 
-    RAD_EX:
-        type: decimal
-        title:
-            ru: Внешний радиус
-        hint:
-            ru: Введите значение внешнего радиуса тела в астрономических единицах
-        min: 0.0000000001
-        max: 20
-        default: 1.2
+      FIELDS:
 
-    RAD_IN:
-        type: decimal
-        title:
-            ru: Внутренний радиус
-        hint:
-            ru: Введите значение внутреннего радиуса тела в астрономических единицах
-        min: 0.0000000001
-        max: 10
-        default: 0.6
+          T_MIN:
+              type: decimal
+              title:
+                  ru: Начальное значение температуры
+              hint:
+                  ru: Введите начальное значение температуры тела в Кельвинах
+              default: 100
+      
+          RHO_MIN:
+              type: decimal
+              title:
+                  ru: Начальное значение плотности
+              hint:
+                  ru: Введите начальное значение температуры тела в Кельвинах
+              default: 100
+      
+          M:
+              type: decimal
+              title:
+                  ru: Масса 
+              hint:
+                  ru: Введите массу тела в кг
+              min: 1
+              default: 150
+              
+          DEC_STEP_M:
+              type: decimal
+              title:
+                  ru: Степень десяти для массы
+              hint:
+                  ru: В какой степени десяти измеряется масса тела
+              min: 1
+              default: 24
 
-    M:
-        type: decimal
-        title:
-            ru: Масса 
-        hint:
-            ru: Введите массу тела в кг
-        min: 1
-        default: 150
-        
-    DEC_STEP_M:
-        type: decimal
-        title:
-            ru: Степень десяти для массы
-        hint:
-            ru: В какой степени десяти измеряется масса тела
-        min: 1
-        default: 24
-        
+      STRUCTURE:
+          - group:
+              key: phys_settings
+              title:  
+                  ru: Физические параметры тела
+              fields:
+                  - field: T_MIN
+                    width: full
+                  - field: RHO_MIN
+                    width: full
+                  - field: M
+                  - field: DEC_STEP_M
     
 
 STRUCTURE:
 
 - group:
-        key: phys_settings
+        key: phys_set
         title:  
             ru: Физические параметры тела
         fields:
-            - field: T_MIN
+            - separator:
+                title:
+                  ru: Добавление тела и его физических параметров
+            - field: PHYS_PAR
               width: full
-            - field: RAD_EX
-            - field: RAD_IN
-            - field: M
-            - field: DEC_STEP_M
+    
+            
+            
+            
+            
             
 
 
