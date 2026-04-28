@@ -20,9 +20,32 @@ class Solver:
         if gas_disk_set == None:
             None
         else:
-            self.PHYS_FUNC = gas_disk_set[9]
-            self.T_MIN = gas_disk_set[10]
-            self.DIRECTION = gas_disk_set[9]
+            self.PHYS_FUNC_GAS = gas_disk_set[9]
+            self.T_MIN_GAS = gas_disk_set[10]
+            self.DIRECTION_GAS = gas_disk_set[11]
+            
+        if spheres_set == None:
+            None
+        else:
+            self.PHYS_FUNC_SPHERE = spheres_set[7]
+            self.T_MIN_SPHERE = spheres_set[8]
+            self.DIRECTION_SPHERE = spheres_set[9]
+            
+        if nebulas_set == None:
+            None
+        else:
+            self.PHYS_FUNC_NEBULA = nebulas_set[9]
+            self.T_MIN_NEBULA = nebulas_set[10]
+            self.DIRECTION_NEBULA = nebulas_set[11]
+            
+        if material_points_set == None:
+            None
+        else:
+            self.VX = material_points_set[9]
+            self.VY = material_points_set[10]
+            self.VZ = material_points_set[11]
+            
+        
         
         
         
