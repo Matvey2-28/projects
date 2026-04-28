@@ -1,6 +1,22 @@
 FIELDS:
 
-      T_MIN:
+      T_MIN_DISK:
+          type: decimal
+          title:
+              ru: Начальное значение температуры
+          hint:
+              ru: Введите начальное значение температуры тела в Кельвинах
+          default: 100
+
+      T_MIN_SPHERE:
+          type: decimal
+          title:
+              ru: Начальное значение температуры
+          hint:
+              ru: Введите начальное значение температуры тела в Кельвинах
+          default: 100
+
+      T_MIN_NEBULA:
           type: decimal
           title:
               ru: Начальное значение температуры
@@ -81,29 +97,57 @@ FIELDS:
                   ru: Радиус-функция
             
       
-      RHO_MIN:
+      M_DISK:
           type: decimal
           title:
-              ru: Начальное значение плотности
+              ru: Масса материальной частицы
           hint:
-              ru: Введите начальное значение температуры тела в Кельвинах
-          default: 100
-      
-      M:
+              ru: Введите массу материальной частицы в кг
+          min: 1
+          default: 150
+
+      M_SPHERE:
           type: decimal
           title:
-              ru: Масса 
+              ru: Масса материальной частицы
           hint:
-              ru: Введите массу тела в кг
+              ru: Введите массу материальной частицы в кг
+          min: 1
+          default: 150
+
+      M_NEBULA:
+          type: decimal
+          title:
+              ru: Масса материальной частицы
+          hint:
+              ru: Введите массу материальной частицы в кг
           min: 1
           default: 150
               
-      DEC_STEP_M:
+      DEC_STEP_M_DISK:
           type: decimal
           title:
-              ru: Степень десяти для массы
+              ru: Степень десяти для массы частицы
           hint:
-              ru: В какой степени десяти измеряется масса тела
+              ru: В какой степени десяти измеряется масса частицы
+          min: 1
+          default: 24
+
+      DEC_STEP_M_SPHERE:
+          type: decimal
+          title:
+              ru: Степень десяти для массы частицы
+          hint:
+              ru: В какой степени десяти измеряется масса частицы
+          min: 1
+          default: 24
+
+      DEC_STEP_M_NEBULA:
+          type: decimal
+          title:
+              ru: Степень десяти для массы частицы
+          hint:
+              ru: В какой степени десяти измеряется масса частицы
           min: 1
           default: 24
 
@@ -127,36 +171,30 @@ STRUCTURE:
             - field: VEL
               width: full
               view: dropdown
-            - field: T_MIN
+            - field: T_MIN_DISK
               width: full
-            - field: RHO_MIN
-              width: full
-            - field: M
-            - field: DEC_STEP_M
+            - field: M_DISK
+            - field: DEC_STEP_M_DISK
             - separator:
                 title:
                   ru: Шар
             - field: VEL_3D_SPHERE
               width: full
               view: dropdown
-            - field: T_MIN
+            - field: T_MIN_SPHERE
               width: full
-            - field: RHO_MIN
-              width: full
-            - field: M
-            - field: DEC_STEP_M
+            - field: M_SPHERE
+            - field: DEC_STEP_M_SPHERE
             - separator:
                 title:
                   ru: Туманность
             - field: VEL_3D_NEBULA
               width: full
               view: dropdown
-            - field: T_MIN
+            - field: T_MIN_NEBULA
               width: full
-            - field: RHO_MIN
-              width: full
-            - field: M
-            - field: DEC_STEP_M
+            - field: M_NEBULA
+            - field: DEC_STEP_M_NEBULA
     
             
             

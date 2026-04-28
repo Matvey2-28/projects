@@ -14,13 +14,21 @@ class Solver:
     
         phys_settings = model_data.get_physical_settings()
         self.PHYS_FUNC = phys_settings[0]
+        
         self.VEL = phys_settings[1]
-        self.T_MIN = phys_settings[2]
-        self.RHO_MIN = phys_settings[3]
-        self.MASS = phys_settings[4]
-        self.DEC_STEP_M = phys_settings[5]
-        self.VEL_3D_SPHERE = phys_settings[6]
-        self.VEL_3D_NEBULA = phys_settings[7]
+        self.T_MIN_DISK = phys_settings[2]
+        self.MASS_DISK = phys_settings[3]
+        self.DEC_STEP_M_DISK = phys_settings[4]
+        
+        self.VEL_3D_SPHERE = phys_settings[5]
+        self.T_MIN_SPHERE = phys_settings[6]
+        self.MASS_SPHERE = phys_settings[7]
+        self.DEC_STEP_M_SPHERE = phys_settings[8]
+        
+        self.VEL_3D_NEBULA = phys_settings[9]
+        self.T_MIN_NEBULA = phys_settings[10]
+        self.MASS_NEBULA = phys_settings[11]
+        self.DEC_STEP_M_NEBULA = phys_settings[12]
         
         
         
@@ -40,9 +48,23 @@ class Solver:
         ETA = 1.2348 # Коэффициент среднего расстояния между частицами SPH
 
         
+        func = self.PHYS_FUNC
         
-        temperature = self.T_MIN
-        M = self.MASS * 10 ** self.DEC_STEP
+        direction_disk = self.VEL
+        direction_sphere = self.VEL_3D_SPHERE
+        direction_nebula = self.VEL_3D_NEBULA
+        
+        temperature_disk = self.T_MIN_DISK
+        M_DISK = self.MASS_DISK * 10 ** self.DEC_STEP_M_DISK
+        
+        temperature_sphere = self.T_MIN_SPHERE
+        M_SPHERE = self.MASS_SPHERE * 10 ** self.DEC_STEP_M_SPHERE
+        
+        temperature_nebula = self.T_MIN_NEBULA
+        M_NEBULA = self.MASS_NEBULA * 10 ** self.DEC_STEP_M_NEBULA
+        
+        
+        
         
         def vel_calc_clockwise(x, y):
             alpha = np.atan2(y, x)
@@ -58,7 +80,7 @@ class Solver:
             v_y = -np.sqrt(G * M / r) * np.cos(alpha)
             return v_x, v_y
         
-        def vel_calc_up_circle(x, y, z):
+        def vel_calc_circle(x, y, z):
             alpha = np.atan2(y, x)
             r = np.sqrt(x**2 + y**2 + z**2)
             teta = np.atan2(z, x)
@@ -66,6 +88,11 @@ class Solver:
             v_y = 0
             v_z = np.sqrt(G * M / r) * np.cos(teta)
             return v_x, v_y, v_z
+        
+        def phys_params():
+            
+            if func == 'bell':
+                T = temperature * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
         
 
         
