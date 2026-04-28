@@ -12,23 +12,17 @@ class Solver:
     
     def __init__(self, model_data):
     
-        phys_settings = model_data.get_physical_settings()
-        self.PHYS_FUNC = phys_settings[0]
+        gas_disk_set = model_data.get_gas_disks()
+        spheres_set = model_data.get_spheres()
+        nebulas_set = model_data.get_arbitrary_clusters()
+        material_points_set = model_data.get_material_points()
         
-        self.VEL = phys_settings[1]
-        self.T_MIN_DISK = phys_settings[2]
-        self.MASS_DISK = phys_settings[3]
-        self.DEC_STEP_M_DISK = phys_settings[4]
-        
-        self.VEL_3D_SPHERE = phys_settings[5]
-        self.T_MIN_SPHERE = phys_settings[6]
-        self.MASS_SPHERE = phys_settings[7]
-        self.DEC_STEP_M_SPHERE = phys_settings[8]
-        
-        self.VEL_3D_NEBULA = phys_settings[9]
-        self.T_MIN_NEBULA = phys_settings[10]
-        self.MASS_NEBULA = phys_settings[11]
-        self.DEC_STEP_M_NEBULA = phys_settings[12]
+        if gas_disk_set == None:
+            None
+        else:
+            self.PHYS_FUNC = gas_disk_set[9]
+            self.T_MIN = gas_disk_set[10]
+            self.DIRECTION = gas_disk_set[9]
         
         
         
