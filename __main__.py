@@ -11,5 +11,4 @@ def main(data_path: str, output_path: str) -> None:
 
 
 if __name__ == "__main__":
-    # main(sys.argv[1], sys.argv[2])
-    main('./input.json', './output')
+    main(sys.argv[1], sys.argv[2])

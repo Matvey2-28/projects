@@ -8,7 +8,7 @@
 			"value": [
 				{
 					"id": {
-						"value": "Митрофан"
+						"value": "пык"
 					},
 					"user_satelite@@NUM_PART": {
 						"value": 15000
@@ -47,7 +47,7 @@
 						"value": "clockwise"
 					},
 					"name_for_object": {
-						"value": "Митрофан"
+						"value": "пык"
 					}
 				}
 			]
@@ -56,7 +56,7 @@
 			"value": [
 				{
 					"id": {
-						"value": "Бодик"
+						"value": "ыапып"
 					},
 					"user_satelite@@NUM_PART": {
 						"value": 15000
@@ -87,7 +87,7 @@
 						"value": "clockwise"
 					},
 					"name_for_object": {
-						"value": "Бодик"
+						"value": "ыапып"
 					}
 				}
 			]
@@ -96,7 +96,7 @@
 			"value": [
 				{
 					"id": {
-						"value": "Тихон"
+						"value": "птервер"
 					},
 					"user_satelite@@NUM_PART": {
 						"value": 15000
@@ -133,7 +133,7 @@
 						"value": "clockwise"
 					},
 					"name_for_object": {
-						"value": "Тихон"
+						"value": "птервер"
 					}
 				}
 			]
@@ -142,7 +142,7 @@
 			"value": [
 				{
 					"id": {
-						"value": "Женек"
+						"value": "кцупен"
 					},
 					"user_satelite@@M_NEBULA": {
 						"value": 2
@@ -169,7 +169,7 @@
 						"value": 0
 					},
 					"name_for_object": {
-						"value": "Женек"
+						"value": "кцупен"
 					}
 				}
 			]
