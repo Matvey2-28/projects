@@ -10,7 +10,7 @@ class Parser:
 
     def get_physical_settings(self):
         print('Получены физические настройки.')
-        data = self.data['phys_set']
+        data = self.data['figure_choose']
         visual_settings = []
         for parametr in data:
             visual_settings.append(data[parametr]['value'])

@@ -1,43 +1,186 @@
 {
-	"phys_set": {
-		"PHYS_FUNC": {
-			"value": "bell"
+	"figure_choose": {
+		"BOX_SIZE": {
+			"value": 20,
+			"unit": "ae"
 		},
-		"VEL": {
-			"value": "counterclockwise"
+		"GAS_DISKS": {
+			"value": [
+				{
+					"id": {
+						"value": "Митрофан"
+					},
+					"user_satelite@@NUM_PART": {
+						"value": 15000
+					},
+					"user_satelite@@RADIUS_EXTERIOR": {
+						"value": 1.5,
+						"unit": "ae"
+					},
+					"user_satelite@@RADIUS_INTERIOR": {
+						"value": 0.5,
+						"unit": "ae"
+					},
+					"user_satelite@@THICKNESS": {
+						"value": 0.3,
+						"unit": "ae"
+					},
+					"user_satelite@@XO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@YO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@ZO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@PHYS_FUNC": {
+						"value": "bell"
+					},
+					"user_satelite@@T_MIN_NEBULA": {
+						"value": 100
+					},
+					"user_satelite@@DIRECTION": {
+						"value": "clockwise"
+					},
+					"name_for_object": {
+						"value": "Митрофан"
+					}
+				}
+			]
 		},
-		"T_MIN_DISK": {
-			"value": 100
+		"SPHERES": {
+			"value": [
+				{
+					"id": {
+						"value": "Бодик"
+					},
+					"user_satelite@@NUM_PART": {
+						"value": 15000
+					},
+					"user_satelite@@RADIUS_EXTERIOR": {
+						"value": 1.5,
+						"unit": "ae"
+					},
+					"user_satelite@@XO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@YO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@ZO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@PHYS_FUNC": {
+						"value": "bell"
+					},
+					"user_satelite@@T_MIN_NEBULA": {
+						"value": 100
+					},
+					"user_satelite@@DIRECTION": {
+						"value": "clockwise"
+					},
+					"name_for_object": {
+						"value": "Бодик"
+					}
+				}
+			]
 		},
-		"M_DISK": {
-			"value": 16
+		"ARBITARY_CLUSTERS": {
+			"value": [
+				{
+					"id": {
+						"value": "Тихон"
+					},
+					"user_satelite@@NUM_PART": {
+						"value": 15000
+					},
+					"user_satelite@@RADIUS_EXTERIOR": {
+						"value": 1.5,
+						"unit": "ae"
+					},
+					"user_satelite@@MATH_FUNC": {
+						"value": "y=x**2"
+					},
+					"user_satelite@@Z_LIM": {
+						"value": 100
+					},
+					"user_satelite@@XO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@YO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@ZO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@PHYS_FUNC": {
+						"value": "bell"
+					},
+					"user_satelite@@T_MIN_NEBULA": {
+						"value": 100
+					},
+					"user_satelite@@DIRECTION": {
+						"value": "clockwise"
+					},
+					"name_for_object": {
+						"value": "Тихон"
+					}
+				}
+			]
 		},
-		"DEC_STEP_M_DISK": {
-			"value": 30
+		"MATERIAL_POINTS": {
+			"value": [
+				{
+					"id": {
+						"value": "Женек"
+					},
+					"user_satelite@@M_NEBULA": {
+						"value": 2
+					},
+					"user_satelite@@XO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@YO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@ZO": {
+						"value": 10,
+						"unit": "ae"
+					},
+					"user_satelite@@VX": {
+						"value": 10000
+					},
+					"user_satelite@@VY": {
+						"value": 10000
+					},
+					"user_satelite@@VZ": {
+						"value": 0
+					},
+					"name_for_object": {
+						"value": "Женек"
+					}
+				}
+			]
+		}
+	},
+	"time_period": {
+		"TIME_END": {
+			"value": 365
 		},
-		"VEL_3D_SPHERE": {
-			"value": "up-circle"
-		},
-		"T_MIN_SPHERE": {
-			"value": 109
-		},
-		"M_SPHERE": {
-			"value": 14
-		},
-		"DEC_STEP_M_SPHERE": {
-			"value": 21
-		},
-		"VEL_3D_NEBULA": {
-			"value": "clockwise"
-		},
-		"T_MIN_NEBULA": {
-			"value": 92
-		},
-		"M_NEBULA": {
-			"value": 15
-		},
-		"DEC_STEP_M_NEBULA": {
-			"value": 27
+		"DELTA_TIME": {
+			"value": 24
 		}
 	}
 }

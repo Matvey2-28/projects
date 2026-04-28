@@ -1,223 +1,560 @@
-FIELDS:
+FIELDS:   
+    TIME_END:
+        type: integer
+        title:
+            ru: Время расчета
+        hint:
+            ru: Введите желаемое время расчета в днях
+        min: 7
+        max: 1000
+        default: 365
 
-      T_MIN_DISK:
-          type: decimal
-          title:
-              ru: Начальное значение температуры
-          hint:
-              ru: Введите начальное значение температуры тела в Кельвинах
-          default: 100
+    DELTA_TIME:
+        type: integer
+        title:
+            ru: Период расчета
+        hint:
+            ru: Введите желаемый период расчета в часах
+        min: 1
+        max: 168
+        default: 24
 
-      T_MIN_SPHERE:
-          type: decimal
-          title:
-              ru: Начальное значение температуры
-          hint:
-              ru: Введите начальное значение температуры тела в Кельвинах
-          default: 100
-
-      T_MIN_NEBULA:
-          type: decimal
-          title:
-              ru: Начальное значение температуры
-          hint:
-              ru: Введите начальное значение температуры тела в Кельвинах
-          default: 100
-
-      VEL:
-          type: string
-          title:
-              ru: Направление скорости частиц
-          hint:
-              ru: По какому направлению относитьельно тела будут двигаться частицы
-          default: 'clockwise'
-          enum:
-            - value: 'clockwise'
-              name:
-                  ru: По часовой стрелке
-            - value: 'counterclockwise'
-              name:
-                  ru: Против часовой стрелки
-
-      VEL_3D_SPHERE:
-          type: string
-          title:
-              ru: Направление скорости частиц
-          hint:
-              ru: По какому направлению относитьельно тела будут двигаться частицы
-          default: 'clockwise'
-          enum:
-            - value: 'clockwise'
-              name:
-                  ru: По часовой стрелке
-            - value: 'counterclockwise'
-              name:
-                  ru: Против часовой стрелки
-            - value: 'up-circle'
-              name:
-                  ru: Вверх по кругу
-            - value: 'down-circle'
-              name:
-                  ru: Вниз по кругу
-
-      VEL_3D_NEBULA:
-          type: string
-          title:
-              ru: Направление скорости частиц
-          hint:
-              ru: По какому направлению относитьельно тела будут двигаться частицы
-          default: 'clockwise'
-          enum:
-            - value: 'clockwise'
-              name:
-                  ru: По часовой стрелке
-            - value: 'counterclockwise'
-              name:
-                  ru: Против часовой стрелки
-            - value: 'up-circle'
-              name:
-                  ru: Вверх по кругу
-            - value: 'down-circle'
-              name:
-                  ru: Вниз по кругу
-
-      PHYS_FUNC:
-          type: string
-          title:
-              ru: Физическая функция
-          hint:
-              ru: Введите по какой математической функции будут строиться температуры и плотности
-          default: 'bell'
-          enum:
-            - value: 'bell'
-              name:
-                  ru: Функция Белла
-            - value: 'radius'
-              name:
-                  ru: Радиус-функция
-            
-      
-      M_DISK:
-          type: decimal
-          title:
-              ru: Масса материальной частицы
-          hint:
-              ru: Введите массу материальной частицы в кг
-          min: 1
-          default: 150
-
-      M_SPHERE:
-          type: decimal
-          title:
-              ru: Масса материальной частицы
-          hint:
-              ru: Введите массу материальной частицы в кг
-          min: 1
-          default: 150
-
-      M_NEBULA:
-          type: decimal
-          title:
-              ru: Масса материальной частицы
-          hint:
-              ru: Введите массу материальной частицы в кг
-          min: 1
-          default: 150
-              
-      DEC_STEP_M_DISK:
-          type: decimal
-          title:
-              ru: Степень десяти для массы частицы
-          hint:
-              ru: В какой степени десяти измеряется масса частицы
-          min: 1
-          default: 24
-
-      DEC_STEP_M_SPHERE:
-          type: decimal
-          title:
-              ru: Степень десяти для массы частицы
-          hint:
-              ru: В какой степени десяти измеряется масса частицы
-          min: 1
-          default: 24
-
-      DEC_STEP_M_NEBULA:
-          type: decimal
-          title:
-              ru: Степень десяти для массы частицы
-          hint:
-              ru: В какой степени десяти измеряется масса частицы
-          min: 1
-          default: 24
-
+    BOX_SIZE:
+        type: integer
+        title:
+            ru: Величина рабочей области
+        hint:
+            ru: Введите размер рабочей области расчета вашей задачи в желаемых 
+        units: lenght
+        default: 20
     
+    GAS_DISKS:
+        title:
+          ru: Газовые диски
+        type: object
+        FIELDS:
+          NUM_PART:
+              type: integer
+              title:
+                  ru: Количество частиц
+              hint:
+                  ru: Введите желаемое количество частиц
+              min: 5000
+              max: 5000000
+              default: 15000
+
+          RADIUS_EXTERIOR:
+              type: decimal
+              title:
+                  ru: Наружный радиус
+              hint:
+                  ru: Введите радиус в желаемых единицах
+              min: 0.1
+              units: lenght
+              default: 1.5
+
+          RADIUS_INTERIOR:
+              type: decimal
+              title:
+                  ru: Внутренний радиус
+              hint:
+                  ru: Введите желаемый радиус отверстия в желаемых единицах
+              min: 0.1
+              units: lenght
+              default: 0.5
+
+          THICKNESS:
+              type: decimal
+              title:
+                  ru: Толщина 
+              hint:
+                  ru: Введите желаемую толщину в желаемых единицах
+              min: 0.05
+              units: lenght
+              default: 0.3
+
+          XO:
+              type: integer
+              title:
+                  ru: X нулевое
+              hint:
+                  ru: Введите X нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          YO:
+              type: integer
+              title:
+                  ru: Y нулевое
+              hint:
+                  ru: Введите Y нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          ZO:
+              type: integer
+              title:
+                  ru: Z нулевое
+              hint:
+                  ru: Введите Z нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          PHYS_FUNC:
+              type: string
+              title:
+                  ru: Физическая функция
+              hint:
+                  ru: Введите по какой математической функции будут строиться температуры и плотности
+              default: 'bell'
+              enum:
+                - value: 'bell'
+                  name:
+                      ru: Функция Белла
+                - value: 'radius'
+                  name:
+                      ru: Радиус-функция
+
+          T_MIN_NEBULA:
+              type: decimal
+              title:
+                  ru: Начальное значение температуры
+              hint:
+                  ru: Введите начальное значение температуры тела в Кельвинах
+              default: 100
+
+          DIRECTION:
+              type: string
+              title:
+                  ru: Направление скорости частиц
+              hint:
+                  ru: По какому направлению относитьельно тела будут двигаться частицы
+              default: 'clockwise'
+              enum:
+                - value: 'clockwise'
+                  name:
+                      ru: По часовой стрелке
+                - value: 'counterclockwise'
+                  name:
+                      ru: Против часовой стрелки
+
+        STRUCTURE:
+            - group:
+                key: user_satelite
+                title:
+                  ru: Добавить
+                fields:
+                    - separator:
+                        title:
+                          ru: Структурные параметры
+                      width: full  
+                    - field: NUM_PART
+                    - field: RADIUS_EXTERIOR
+                    - field: RADIUS_INTERIOR
+                    - field: THICKNESS
+                    - field: XO 
+                      width: full
+                    - field: YO 
+                      width: full
+                    - field: ZO 
+                      width: full
+                    - separator:
+                        title:
+                          ru: Физические параметры
+                    - field: PHYS_FUNC
+                      width: full
+                    - field: T_MIN_NEBULA
+                      width: full
+                    - field: DIRECTION
+                      width: full
+                      view: dropdown
+
+    SPHERES:
+        title:
+          ru: Тела сферической формы
+        type: object
+        FIELDS:
+          NUM_PART:
+              type: integer
+              title:
+                  ru: Количество частиц
+              hint:
+                  ru: Введите желаемое количество частиц
+              min: 5000
+              max: 5000000
+              default: 15000
+
+          RADIUS_EXTERIOR:
+              type: decimal
+              title:
+                  ru: Наружный радиус
+              hint:
+                  ru: Введите радиус в желаемых единицах
+              min: 0.1
+              units: lenght
+              default: 1.5
+
+          XO:
+              type: integer
+              title:
+                  ru: X нулевое
+              hint:
+                  ru: Введите X нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          YO:
+              type: integer
+              title:
+                  ru: Y нулевое
+              hint:
+                  ru: Введите Y нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          ZO:
+              type: integer
+              title:
+                  ru: Z нулевое
+              hint:
+                  ru: Введите Z нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          PHYS_FUNC:
+              type: string
+              title:
+                  ru: Физическая функция
+              hint:
+                  ru: Введите по какой математической функции будут строиться температуры и плотности
+              default: 'bell'
+              enum:
+                - value: 'bell'
+                  name:
+                      ru: Функция Белла
+                - value: 'radius'
+                  name:
+                      ru: Радиус-функция
+
+          T_MIN_NEBULA:
+              type: decimal
+              title:
+                  ru: Начальное значение температуры
+              hint:
+                  ru: Введите начальное значение температуры тела в Кельвинах
+              default: 100
+
+          DIRECTION:
+              type: string
+              title:
+                  ru: Направление скорости частиц
+              hint:
+                  ru: По какому направлению относитьельно тела будут двигаться частицы
+              default: 'clockwise'
+              enum:
+                - value: 'clockwise'
+                  name:
+                      ru: По часовой стрелке
+                - value: 'counterclockwise'
+                  name:
+                      ru: Против часовой стрелки
+
+
+        STRUCTURE:
+            - group:
+                key: user_satelite
+                title:
+                  ru: Добавить
+                fields:
+                    - separator:
+                        title:
+                          ru: Структурные параметры
+                    - field: CHOOSE
+                      width: full  
+                    - field: NUM_PART
+                    - field: RADIUS_EXTERIOR
+          
+                    - field: XO 
+                      width: full
+                    - field: YO 
+                      width: full
+                    - field: ZO 
+                      width: full
+                    - separator:
+                        title:
+                          ru: Физические параметры
+                    - field: PHYS_FUNC
+                      width: full
+                    - field: T_MIN_NEBULA
+                      width: full
+                    - field: DIRECTION
+                      width: full
+                      view: dropdown
+
+    ARBITARY_CLUSTERS:
+        title:
+          ru: Газовые скопления произвольной формы
+        type: object
+        FIELDS:
+
+          NUM_PART:
+              type: integer
+              title:
+                  ru: Количество частиц
+              hint:
+                  ru: Введите желаемое количество частиц
+              min: 5000
+              max: 5000000
+              default: 15000
+
+          RADIUS_EXTERIOR:
+              type: decimal
+              title:
+                  ru: Наружный радиус
+              hint:
+                  ru: Введите радиус в желаемых единицах
+              min: 0.1
+              units: lenght
+              default: 1.5
+
+          MATH_FUNC:
+              type: string
+              title:
+                  ru: Математическая функция по которой задается фигура
+              hint:
+                  ru: Введите функцию, например y=x**2
+              default: y=x**2
+
+          Z_LIM:
+              type: integer
+              title:
+                  ru: Расстояние до линий среза функции
+              hint:
+                  ru: Введите расстояние до линии среза функции относительно ZO в обе стороны
+              default: 100
+
+          XO:
+              type: integer
+              title:
+                  ru: X нулевое
+              hint:
+                  ru: Введите X нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          YO:
+              type: integer
+              title:
+                  ru: Y нулевое
+              hint:
+                  ru: Введите Y нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          ZO:
+              type: integer
+              title:
+                  ru: Z нулевое
+              hint:
+                  ru: Введите Z нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          PHYS_FUNC:
+              type: string
+              title:
+                  ru: Физическая функция
+              hint:
+                  ru: Введите по какой математической функции будут строиться температуры и плотности
+              default: 'bell'
+              enum:
+                - value: 'bell'
+                  name:
+                      ru: Функция Белла
+                - value: 'radius'
+                  name:
+                      ru: Радиус-функция
+
+          T_MIN_NEBULA:
+              type: decimal
+              title:
+                  ru: Начальное значение температуры
+              hint:
+                  ru: Введите начальное значение температуры тела в Кельвинах
+              default: 100
+
+          DIRECTION:
+              type: string
+              title:
+                  ru: Направление скорости частиц
+              hint:
+                  ru: По какому направлению относитьельно тела будут двигаться частицы
+              default: 'clockwise'
+              enum:
+                - value: 'clockwise'
+                  name:
+                      ru: По часовой стрелке
+                - value: 'counterclockwise'
+                  name:
+                      ru: Против часовой стрелки
+
+        STRUCTURE:
+            - group:
+                key: user_satelite
+                title:
+                  ru: Добавить
+                fields:
+                    - separator:
+                        title:
+                          ru: Структурные параметры
+                      width: full  
+                    - field: NUM_PART
+                    - field: RADIUS_EXTERIOR
+                    - field: MATH_FUNC
+                      width: full
+                    - field: Z_LIM
+                      width: full
+                    - field: XO 
+                      width: full
+                    - field: YO 
+                      width: full
+                    - field: ZO 
+                      width: full
+                    - separator:
+                        title:
+                          ru: Физические параметры
+                    - field: PHYS_FUNC
+                      width: full
+                    - field: T_MIN_NEBULA
+                      width: full
+                    - field: DIRECTION
+                      width: full
+                      view: dropdown
+
+    MATERIAL_POINTS:
+        title:
+          ru: Материальные частицы
+        type: object
+        FIELDS:
+          XO:
+              type: integer
+              title:
+                  ru: X нулевое
+              hint:
+                  ru: Введите X нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          YO:
+              type: integer
+              title:
+                  ru: Y нулевое
+              hint:
+                  ru: Введите Y нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          ZO:
+              type: integer
+              title:
+                  ru: Z нулевое
+              hint:
+                  ru: Введите Z нулевое в желаемых единицах
+              units: lenght
+              default: 10
+
+          VX:
+              type: integer
+              title:
+                  ru: VX
+              hint:
+                  ru: Введите скорость материальной частицы вдоль оси X в м/с
+              default: 10000
+
+          VY:
+              type: integer
+              title:
+                  ru: VY
+              hint:
+                  ru: Введите скорость материальной частицы вдоль оси Y в м/с
+              default: 10000
+
+          VZ:
+              type: integer
+              title:
+                  ru: VZ
+              hint:
+                  ru: Введите скорость материальной частицы вдоль оси Z в м/с
+              default: 0
+              
+          M_NEBULA:
+               type: decimal
+               title:
+                   ru: Масса частицы
+               hint:
+                   ru: Введите массу материальной частицы в кг
+               min: 1
+               max: 1e1000
+               default: 2
+
+        STRUCTURE:
+            - group:
+                key: user_satelite
+                title:
+                  ru: Добавить
+                fields:
+                    - field: M_NEBULA
+                      width: full
+                    - field: XO 
+                      width: full
+                    - field: YO 
+                      width: full
+                    - field: ZO 
+                      width: full
+                    - field: VX 
+                      width: full
+                    - field: VY 
+                      width: full
+                    - field: VZ 
+                      width: full
 
 STRUCTURE:
+- group:
+        key: figure_choose
+        title:  
+            ru: Выбор тел и материальных частиц
+        fields:
+            - field: BOX_SIZE
+            - separator:
+                title:
+                    ru: Выбор тел
+            - field: GAS_DISKS    
+            - field: SPHERES
+            - field: ARBITARY_CLUSTERS
+            - separator:
+                title:
+                    ru: Выбор материальных частиц
+            - field: MATERIAL_POINTS
 
 - group:
-        key: phys_set
-        title:  
-            ru: Физические параметры тела
-        fields:
-            - separator:
-                title:
-                  ru: Определение функции по которой будет идти расстановка температур и плотностей
-            - field: PHYS_FUNC
-              width: full
-            - separator:
-                title:
-                  ru: Диск
-            - field: VEL
-              width: full
-              view: dropdown
-            - field: T_MIN_DISK
-              width: full
-            - field: M_DISK
-            - field: DEC_STEP_M_DISK
-            - separator:
-                title:
-                  ru: Шар
-            - field: VEL_3D_SPHERE
-              width: full
-              view: dropdown
-            - field: T_MIN_SPHERE
-              width: full
-            - field: M_SPHERE
-            - field: DEC_STEP_M_SPHERE
-            - separator:
-                title:
-                  ru: Туманность
-            - field: VEL_3D_NEBULA
-              width: full
-              view: dropdown
-            - field: T_MIN_NEBULA
-              width: full
-            - field: M_NEBULA
-            - field: DEC_STEP_M_NEBULA
-    
-            
-            
-            
-            
-            
-
+        key: time_period 
+        title: 
+            ru: Период расчета
+        fields:         
+            - field: TIME_END
+            - field: DELTA_TIME
 
 UNITS:
     lenght:
+        ae:
+            title:
+                ru: Ае
+            m: 149597870700
+        km:
+            title:
+                ru: Километры
+            m: 1000
         m:
             title:
                 ru: Метры
-            cm: 1
-        mm:
-            title:
-                ru: Сантиметры
-            m: 0.001
-        cm:
-            title:
-                ru: Сантиметры
-            m: 0.01
-        km:
-            title:
-                ru: Сантиметры
-            m: 1000
+            m: 1

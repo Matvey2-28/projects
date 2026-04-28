@@ -91,8 +91,30 @@ class Solver:
         
         def phys_params():
             
+            x0 = box_size / 2
+            y0 = box_size / 2
+            
             if func == 'bell':
                 T = temperature * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
+                rho = n_H * m_H * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
+            else:
+                T = temperature * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
+                rho = n_H * m_H * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
+                
+            P = R / MU_H * rho * T
+            u = 3  * k * T / m_H / 2
+        
+            V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
+            smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
+        
+            masses = V_disk / num_part * rho
+        
+            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
+            vel_star = np.array([[0, 0, 0]])
+            mass_star = np.array([M_])
+            return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+                    (pos, vel, masses, pos_star, vel_star, mass_star))
+            
         
 
         
