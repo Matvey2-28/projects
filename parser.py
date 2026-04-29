@@ -86,8 +86,7 @@ class Parser:
         time_data = self.data.get('time_period', {})
         time_end = time_data.get('TIME_END')
         delta_time = time_data.get('DELTA_TIME')
-        
-        # Выводим как список [TIME_END, DELTA_TIME]
+
         print([time_end, delta_time])
 
 if __name__ == '__main__':
