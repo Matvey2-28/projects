@@ -41,6 +41,7 @@ class Solver:
         if material_points_set == None:
             None
         else:
+            self.MASS = material_points_set[2]
             self.VX = material_points_set[9]
             self.VY = material_points_set[10]
             self.VZ = material_points_set[11]
@@ -65,20 +66,24 @@ class Solver:
         ETA = 1.2348 # Коэффициент среднего расстояния между частицами SPH
 
         
-        func = self.PHYS_FUNC
+        func_disk = self.PHYS_FUNC_GAS
+        func_sphere = self.PHYS_FUNC_SPHERE
+        func_nebula = self.PHYS_FUNC_NEBULA
         
-        direction_disk = self.VEL
-        direction_sphere = self.VEL_3D_SPHERE
-        direction_nebula = self.VEL_3D_NEBULA
+        direction_disk = self.DIRECTION_GAS
+        direction_sphere = self.DIRECTION_SPHERE
+        direction_nebula = self.DIRECTION_NEBULA
         
         temperature_disk = self.T_MIN_DISK
-        M_DISK = self.MASS_DISK * 10 ** self.DEC_STEP_M_DISK
-        
         temperature_sphere = self.T_MIN_SPHERE
-        M_SPHERE = self.MASS_SPHERE * 10 ** self.DEC_STEP_M_SPHERE
-        
         temperature_nebula = self.T_MIN_NEBULA
-        M_NEBULA = self.MASS_NEBULA * 10 ** self.DEC_STEP_M_NEBULA
+        
+        M_POINT = self.MASS
+        
+        vel_point_x = self.VX
+        vel_point_y = self.VY
+        vel_point_z = self.VZ
+        
         
         
         
@@ -106,16 +111,16 @@ class Solver:
             v_z = np.sqrt(G * M / r) * np.cos(teta)
             return v_x, v_y, v_z
         
-        def phys_params():
+        def gas_disk():
             
             x0 = box_size / 2
             y0 = box_size / 2
             
-            if func == 'bell':
-                T = temperature * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
+            if func_disk == 'bell':
+                T = temperature_disk * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
                 rho = n_H * m_H * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
             else:
-                T = temperature * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
+                T = temperature_disk * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
                 rho = n_H * m_H * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2))
                 
             P = R / MU_H * rho * T
@@ -127,10 +132,63 @@ class Solver:
             masses = V_disk / num_part * rho
         
             pos_star = np.array([[box_size / 2, box_size / 2, 0]])
-            vel_star = np.array([[0, 0, 0]])
-            mass_star = np.array([M_])
+            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
+            mass_point = np.array([M_POINT])
             return ((pos, vel, masses, u, P, T, rho, smth_lnght),
-                    (pos, vel, masses, pos_star, vel_star, mass_star))
+                    (pos, vel, masses, pos_star, vel_star, mass_point))
+        
+        def gas_sphere():
+            
+            x0 = box_size / 2
+            y0 = box_size / 2
+            z0 = box_size / 2
+            
+            if func_disk == 'bell':
+                T = temperature_sphere * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2 - (2.5 * (pos[:, 1] - z0) / AU) ** 2)
+                rho = n_H * m_H * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
+            else:
+                T = temperature_sphere * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2) + (pos[:, 2] - z0)**2) - (2.5 * (pos[:, 1] - z0) / AU) ** 2)
+                rho = n_H * m_H * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2 + (pos[:, 2] - z0)**2)
+                
+            P = R / MU_H * rho * T
+            u = 3  * k * T / m_H / 2
+        
+            V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
+            smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
+        
+            masses = V_disk / num_part * rho
+        
+            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
+            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
+            mass_point = np.array([M_POINT])
+            return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+                    (pos, vel, masses, pos_star, vel_star, mass_point))
+        
+        def gas_nebula():
+            
+            x0 = box_size / 2
+            y0 = box_size / 2
+            
+            if func_disk == 'bell':
+                T = temperature_sphere * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2 - (2.5 * (pos[:, 1] - z0) / AU) ** 2)
+                rho = n_H * m_H * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2)
+            else:
+                T = temperature_sphere * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2) + (pos[:, 2] - z0)**2) - (2.5 * (pos[:, 1] - z0) / AU) ** 2)
+                rho = n_H * m_H * (AU / np.sqrt((pos[:, 0] - x0)**2 + (pos[:, 1] - y0)**2) + (pos[:, 2] - z0)**2)
+                
+            P = R / MU_H * rho * T
+            u = 3  * k * T / m_H / 2
+        
+            V_disk = np.pi * (radius_exterior**2 - radius_interior**2) * thickness
+            smth_lnght = np.full(num_part, ((3 * V_disk) / (4 * np.pi * num_part))**(1 / 3))
+        
+            masses = V_disk / num_part * rho
+        
+            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
+            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
+            mass_point = np.array([M_POINT])
+            return ((pos, vel, masses, u, P, T, rho, smth_lnght),
+                    (pos, vel, masses, pos_star, vel_star, mass_point))
             
         
 
