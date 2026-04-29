@@ -38,7 +38,7 @@
 						"unit": "ae"
 					},
 					"user_satelite@@PHYS_FUNC": {
-						"value": "bell"
+						"value": "radius"
 					},
 					"user_satelite@@T_MIN_NEBULA": {
 						"value": 100
@@ -78,7 +78,7 @@
 						"unit": "ae"
 					},
 					"user_satelite@@PHYS_FUNC": {
-						"value": "bell"
+						"value": "radius"
 					},
 					"user_satelite@@T_MIN_NEBULA": {
 						"value": 100
@@ -124,7 +124,7 @@
 						"unit": "ae"
 					},
 					"user_satelite@@PHYS_FUNC": {
-						"value": "bell"
+						"value": "radius"
 					},
 					"user_satelite@@T_MIN_NEBULA": {
 						"value": 100
