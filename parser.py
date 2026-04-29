@@ -93,7 +93,6 @@ class Parser:
 if __name__ == '__main__':
     parser = Parser('input.json')
     
-    # Вызов отдельных функций для вывода каждой группы данных
     parser.get_gas_disks()
     parser.get_spheres()
     parser.get_arbitrary_clusters()
