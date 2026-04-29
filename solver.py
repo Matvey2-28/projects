@@ -102,14 +102,6 @@ class Solver:
             v_y = -np.sqrt(G * M / r) * np.cos(alpha)
             return v_x, v_y
         
-        def vel_calc_circle(x, y, z):
-            alpha = np.atan2(y, x)
-            r = np.sqrt(x**2 + y**2 + z**2)
-            teta = np.atan2(z, x)
-            v_x = np.sqrt(G * M / r) * np.sin(teta) * np.cos(alpha)
-            v_y = 0
-            v_z = np.sqrt(G * M / r) * np.cos(teta)
-            return v_x, v_y, v_z
         
         def gas_disk():
             
@@ -168,6 +160,7 @@ class Solver:
             
             x0 = box_size / 2
             y0 = box_size / 2
+            z0 = box_size / 2
             
             if func_disk == 'bell':
                 T = temperature_sphere * np.exp((-0.5 * (pos[:, 0] - x0) / AU) ** 2 - (1.5 * (pos[:, 1] - y0) / AU) ** 2 - (2.5 * (pos[:, 1] - z0) / AU) ** 2)
