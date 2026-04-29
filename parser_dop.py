@@ -1,66 +1,100 @@
-
 import json
 
 class Parser:
-    def __init__(self, data_path):
-        with open(data_path, 'r', encoding='utf-8') as f:
+    def __init__(self, data):
+
+        with open(data, 'r', encoding='utf-8') as f:
             raw_data = json.load(f)
+
         self.data = self._clean_json(raw_data)
 
     def _clean_json(self, item):
+
         if isinstance(item, dict):
+
             if 'value' in item:
                 val = item['value']
                 unit = item.get('unit')
-                return (self._clean_json(val), unit.strip()) if unit else self._clean_json(val)
+
+                if unit:
+                    return (self._clean_json(val), unit.strip())
+                return self._clean_json(val)
+            
+
             return {k.strip(): self._clean_json(v) for k, v in item.items()}
         elif isinstance(item, list):
+
             return [self._clean_json(i) for i in item]
         elif isinstance(item, str):
             return item.strip()
         return item
 
     def _get_objects_values_by_type(self, obj_type):
+      
         fc = self.data.get('figure_choose', {})
         items = fc.get(obj_type, [])
-        result = []
+        
+        all_objects_values = []
+        
         for item in items:
-            obj_values = [item.get('id'), item.get('name_for_object')]
+
+            obj_values = [
+                item.get('id'),             
+                item.get('name_for_object') 
+            ]
+
+
             for key, val in item.items():
                 if key not in ['id', 'name_for_object']:
-                    # Извлекаем значение и единицу, если есть
-                    if isinstance(val, dict):
-                        v = val.get('value')
-                        u = val.get('unit')
-                        if u == 'ae':
-                            v *= 1.49e11
-                        elif u == 'km':
-                            v *= 1000
-                        # Можно добавить другие единицы по `config.yaml`
-                        obj_values.append(v)
-                    else:
-                        obj_values.append(val)
-            result.append(obj_values)
-        return result
+                    obj_values.append(val)
+            
+            all_objects_values.append(obj_values)
+            
+        return all_objects_values
 
-    def get_gas_disks(self): return self._get_objects_values_by_type('GAS_DISKS')
-    def get_spheres(self): return self._get_objects_values_by_type('SPHERES')
-    def get_arbitrary_clusters(self): return self._get_objects_values_by_type('ARBITARY_CLUSTERS')
-    def get_material_points(self): return self._get_objects_values_by_type('MATERIAL_POINTS')
+    def get_gas_disks(self):
+
+        lists = self._get_objects_values_by_type('GAS_DISKS')
+        for lst in lists:
+            print(lst)
+
+    def get_spheres(self):
+      
+        lists = self._get_objects_values_by_type('SPHERES')
+        for lst in lists:
+            print(lst)
+
+    def get_arbitrary_clusters(self):
+        lists = self._get_objects_values_by_type('ARBITARY_CLUSTERS')
+        for lst in lists:
+            print(lst)
+
+    def get_material_points(self):
+        lists = self._get_objects_values_by_type('MATERIAL_POINTS')
+        for lst in lists:
+            print(lst)
 
     def get_box_size(self):
-        box = self.data.get('figure_choose', {}).get('BOX_SIZE')
-        return [box] if box is not None else []
+        box_size = self.data.get('figure_choose', {}).get('BOX_SIZE')
+        if box_size is not None:
+            print([box_size])
+        else:
+            print([])
 
     def get_time_period(self):
-        td = self.data.get('time_period', {})
-        return [td.get('TIME_END'), td.get('DELTA_TIME')]
+
+        time_data = self.data.get('time_period', {})
+        time_end = time_data.get('TIME_END')
+        delta_time = time_data.get('DELTA_TIME')
+
+        print([time_end, delta_time])
 
 if __name__ == '__main__':
-    p = Parser('input.json')
-    print(f"GAS_DISKS: {p.get_gas_disks()}")
-    print(f"SPHERES: {p.get_spheres()}")
-    print(f"ARBITARY_CLUSTERS: {p.get_arbitrary_clusters()}")
-    print(f"MATERIAL_POINTS: {p.get_material_points()}")
-    print(f"BOX_SIZE: {p.get_box_size()}")
-    print(f"TIME_PERIOD: {p.get_time_period()}")
+    parser = Parser('input.json')
+    
+    parser.get_gas_disks()
+    parser.get_spheres()
+    parser.get_arbitrary_clusters()
+    parser.get_material_points()
+    parser.get_box_size()
+    parser.get_time_period()
