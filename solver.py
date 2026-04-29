@@ -38,13 +38,6 @@ class Solver:
             self.T_MIN_NEBULA = nebulas_set[10]
             self.DIRECTION_NEBULA = nebulas_set[11]
             
-        if material_points_set == None:
-            None
-        else:
-            self.MASS = material_points_set[2]
-            self.VX = material_points_set[9]
-            self.VY = material_points_set[10]
-            self.VZ = material_points_set[11]
             
         
         
@@ -77,12 +70,6 @@ class Solver:
         temperature_disk = self.T_MIN_DISK
         temperature_sphere = self.T_MIN_SPHERE
         temperature_nebula = self.T_MIN_NEBULA
-        
-        M_POINT = self.MASS
-        
-        vel_point_x = self.VX
-        vel_point_y = self.VY
-        vel_point_z = self.VZ
         
         
         
@@ -123,11 +110,9 @@ class Solver:
         
             masses = V_disk / num_part * rho
         
-            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
-            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
-            mass_point = np.array([M_POINT])
+            
             return ((pos, vel, masses, u, P, T, rho, smth_lnght),
-                    (pos, vel, masses, pos_star, vel_star, mass_point))
+                    (pos, vel, masses))
         
         def gas_sphere():
             
@@ -150,11 +135,8 @@ class Solver:
         
             masses = V_disk / num_part * rho
         
-            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
-            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
-            mass_point = np.array([M_POINT])
             return ((pos, vel, masses, u, P, T, rho, smth_lnght),
-                    (pos, vel, masses, pos_star, vel_star, mass_point))
+                    (pos, vel, masses))
         
         def gas_nebula():
             
@@ -177,11 +159,9 @@ class Solver:
         
             masses = V_disk / num_part * rho
         
-            pos_star = np.array([[box_size / 2, box_size / 2, 0]])
-            vel_star = np.array([[vel_point_x, vel_point_y, vel_point_z]])
-            mass_point = np.array([M_POINT])
+            
             return ((pos, vel, masses, u, P, T, rho, smth_lnght),
-                    (pos, vel, masses, pos_star, vel_star, mass_point))
+                    (pos, vel, masses))
             
         
 
