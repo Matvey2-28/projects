@@ -1,6 +1,6 @@
 import numpy as np
 import h5py
-import yaml
+# import yaml
 from scipy.spatial import cKDTree
 from typing import Union
 import parser
