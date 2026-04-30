@@ -1,78 +1,47 @@
 import h5py
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 
 file_path = r"C:\Users\user\Desktop\GitHub\projects\output.hdf5"
-output_image = "result_plot.png"
 
-print("File check started")
-print(f"File exists: {os.path.exists(file_path)}")
+print("Reading HDF5 file...")
 
 with h5py.File(file_path, 'r') as f:
-    print("\n=== FILE STRUCTURE ===")
+    # Показываем структуру
+    print("\nKeys in file:", list(f.keys()))
 
 
-    def print_structure(name, obj):
-        print(name, type(obj))
+    # Ищем данные
+    def find_data(name, obj):
         if isinstance(obj, h5py.Dataset):
-            print(f"  Shape: {obj.shape}")
-            print(f"  Dtype: {obj.dtype}")
+            print(f"\nFound dataset: {name}")
+            print(f"Shape: {obj.shape}")
+            print(f"Data type: {obj.dtype}")
 
+            # Читаем данные
+            data = obj[:]
+            print(f"Min: {np.min(data)}, Max: {np.max(data)}")
 
-    f.visititems(print_structure)
-
-    print("\n=== TOP LEVEL KEYS ===")
-    print(list(f.keys()))
-
-    # Пробуем каждый датасет
-    datasets = []
-
-
-    def collect_datasets(name, obj):
-        if isinstance(obj, h5py.Dataset):
-            datasets.append(name)
-
-
-    f.visititems(collect_datasets)
-
-    print(f"\nFound {len(datasets)} datasets: {datasets}")
-
-    if datasets:
-        for ds_name in datasets:
-            print(f"\n=== CHECKING: {ds_name} ===")
-            data = f[ds_name][:]
-            print(f"Shape: {data.shape}")
-            print(f"Dtype: {data.dtype}")
-            print(f"Min: {np.min(data)}")
-            print(f"Max: {np.max(data)}")
-            print(f"Mean: {np.mean(data)}")
-            print(f"Has NaN: {np.any(np.isnan(data))}")
-            print(f"Sample data (first 5): {data.flat[:5] if data.size > 0 else 'empty'}")
-
-            # Сохраняем
-            if len(data.shape) >= 2 and data.shape[-1] > 1 and data.shape[-2] > 1:
-                plt.figure(figsize=(10, 8))
-
-                if len(data.shape) == 2:
-                    plot_data = data
-                elif len(data.shape) == 3:
-                    plot_data = data[data.shape[0] // 2]
-                else:
-                    continue
-
-                print(f"Plotting data range: {np.min(plot_data)} to {np.max(plot_data)}")
-
-                if np.max(plot_data) - np.min(plot_data) == 0:
-                    print("WARNING: All values are the same!")
-
-                plt.imshow(plot_data, cmap='viridis', origin='lower')
+            # Сохраняем как картинку если 2D или 3D
+            if len(data.shape) == 2:
+                plt.figure()
+                plt.imshow(data, cmap='viridis')
                 plt.colorbar()
-                plt.title(
-                    f"{ds_name}\nShape: {plot_data.shape}\nRange: [{np.min(plot_data):.4f}, {np.max(plot_data):.4f}]")
-                plt.savefig(output_image, dpi=300, bbox_inches='tight')
+                plt.savefig('output.png', dpi=300)
                 plt.close()
-                print(f"Saved to {output_image}")
-                break
-            else:
-                print("Skipping - not 2D/3D data")
+                print("Saved 2D plot to output.png")
+
+            elif len(data.shape) == 3:
+                # Берем средний срез
+                mid = data.shape[0] // 2
+                plt.figure()
+                plt.imshow(data[mid], cmap='viridis')
+                plt.colorbar()
+                plt.savefig('output.png', dpi=300)
+                plt.close()
+                print(f"Saved 3D slice (z={mid}) to output.png")
+
+
+    f.visititems(find_data)
+
+print("Done")
