@@ -10,7 +10,7 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 from model import PointNet 
 
 CLASSES = ['bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor', 'night', 'sofa', 'table', 'toilet']
-WEIGHTS_PATH = "best_pointnet_modelnet10.pth" 
+WEIGHTS_PATH = "../best_pointnet_modelnet10.pth"
 
 # =============================================================================
 # ИНИЦИАЛИЗАЦИЯ МОДЕЛИ И ВЕСОВ
